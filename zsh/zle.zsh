@@ -29,6 +29,8 @@ key[Left]='^[[D'
 key[Down]='^[[B'
 key[Right]='^[[C'
 key[Menu]='^[[29~'
+key[MacHome]='^[[H'
+key[MacEnd]='^[[F'
 
 # Create some blank keymaps to play with.
 bindkey -N sins .safe
@@ -55,6 +57,9 @@ bindkey $key[Up] up-line-or-history
 bindkey $key[Down] down-line-or-history
 
 bindkey "^Q" push-line
+
+bindkey $key[MacHome] beginning-of-line
+bindkey $key[MacEnd] end-of-line
 
 bindkey "^A" beginning-of-line
 bindkey "^E" end-of-line
