@@ -3,11 +3,15 @@
 	name = Thomas Danielsson
 [color]
 	status = auto
-[color "status"]
-	untracked = red
-	changed = red
+	branch = auto
+	diff = auto
+	interactive = auto
 [alias]
 	unstage = reset HEAD
 	logs = log --decorate
 	logg = log --graph --decorate --branches --remotes
 	unadd = rm --cached
+	timeline = timeline = log --graph \"--pretty=format:%C(yellow bold)%h%Creset by %C(red)%an%Creset (%ar)%C(cyan bold)%d%Creset%n%s%n%b\" --all
+	ss = status -s
+[core]
+	excludesfile = ~/.dotfiles/gitignore
