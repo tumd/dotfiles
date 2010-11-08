@@ -1,0 +1,13 @@
+[user]
+	email = thomas@elajt.se
+	name = Thomas Danielsson
+[color]
+	status = auto
+[color "status"]
+	untracked = red
+	changed = red
+[alias]
+	unstage = reset HEAD
+	logs = log --decorate
+	logg = log --graph --decorate --branches --remotes
+	unadd = rm --cached
