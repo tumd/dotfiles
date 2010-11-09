@@ -23,6 +23,18 @@ localhost() {
   echo "Added $1 at address 127.0.0.1"
 }
 
+# open a manpage in preview
+# pman () {
+# man -t "${1}" | open -f -a /Applications/Preview.app
+# }
+
+# This is an alternate pman function that I prefer since
+# Preview.app won't ask to save the file before it quits
+# Required: ps2pdf (comes with ghostscript)
+pman () {
+    man -t $* | ps2pdf - - | open -g -f -a /Applications/Preview.app
+}
+
 case $OSTYPE in
   darwin10*)
 		export ARCHFLAGS="-arch x86_64"
