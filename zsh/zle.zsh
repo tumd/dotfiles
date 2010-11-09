@@ -39,9 +39,13 @@ bindkey -N scmd .safe
 # Load required widgets
 autoload insert-composed-char
 autoload edit-command-line
+autoload -U tetris
+
 
 zle -N edit-command-line
 zle -N insert-composed-char
+zle -N tetris
+
 
 # Let the binding begin.
 bindkey $key[Delete] delete-char
@@ -61,8 +65,8 @@ bindkey "^Q" push-line
 bindkey $key[MacHome] beginning-of-line
 bindkey $key[MacEnd] end-of-line
 
-bindkey "^A" beginning-of-line
-bindkey "^E" end-of-line
+#bindkey "^A" beginning-of-line
+#bindkey "^E" end-of-line
 
 bindkey "^N" backward-word
 bindkey "^O" forward-word
@@ -82,6 +86,9 @@ bindkey "^K" insert-composed-char
 
 bindkey "^X" execute-named-cmd
 
-bindkey $key[F1] run-help
-bindkey $key[F2] edit-command-line
+bindkey "^T" tetris
+
+#bindkey $key[F1] run-help
+#bindkey $key[F2] edit-command-line
+bindkey "^e" edit-command-line
 
