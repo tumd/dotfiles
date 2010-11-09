@@ -3,7 +3,7 @@
 # get the name of the branch we are on
 function git_prompt_info() {
   ref=$(git symbolic-ref HEAD 2> /dev/null) || return
-echo "$ZSH_THEME_GIT_PROMPT_PREFIX$(git_prompt_status)${ref#refs/heads/}$(parse_git_dirty)$ZSH_THEME_GIT_PROMPT_SUFFIX"
+echo "$ZSH_THEME_GIT_PROMPT_PREFIX${ref#refs/heads/}$(parse_git_dirty)$(git_prompt_status)$ZSH_THEME_GIT_PROMPT_SUFFIX"
 }
 
 parse_git_dirty () {
@@ -80,32 +80,33 @@ colors
 host_prompt_color() {
   case ${SSH_CLIENT} in 
     [0-9]*)
-      echo "%{$fg[yellow]%}"
+      echo "%{$fg[red]%}"
     ;;;
     
     *)
-      echo "%{$fg[white]%}"
+      echo "%{$fg[green]%}"
     ;;;
   esac
 }
 
 # git theming
-ZSH_THEME_GIT_PROMPT_PREFIX="%{$fg_bold[blue]%}(%{$fg_no_bold[green]%}%B"
-ZSH_THEME_GIT_PROMPT_SUFFIX="%b%{$fg_bold[blue]%})%{$reset_color%}"
+ZSH_THEME_GIT_PROMPT_PREFIX="%{$fg[green]%}<%{$fg[white]%}git%{$fg[green]%}:%{$reset_color%}"
+ZSH_THEME_GIT_PROMPT_SUFFIX="%{$fg[green]%}>%{$reset_color%}"
 ZSH_THEME_GIT_PROMPT_CLEAN=""
-ZSH_THEME_GIT_PROMPT_DIRTY="%{$fg_bold[red]%}*"
-ZSH_THEME_GIT_PROMPT_ADDED="%{$fg[yellow]%}"
-ZSH_THEME_GIT_PROMPT_MODIFIED="%{$fg[yellow]%}"
-ZSH_THEME_GIT_PROMPT_DELETED="%{$fg[yellow]%}"
-ZSH_THEME_GIT_PROMPT_RENAMED="%{$fg[yellow]%}"
-ZSH_THEME_GIT_PROMPT_UNMERGED="%{$fg[red]%}"
-ZSH_THEME_GIT_PROMPT_UNTRACKED="%{$fg[red]%}"
+ZSH_THEME_GIT_PROMPT_DIRTY="%{$fg[green]%}::%{$reset_color%}"
+ZSH_THEME_GIT_PROMPT_ADDED="%{$fg[green]%}A"
+ZSH_THEME_GIT_PROMPT_MODIFIED="%{$fg[red]%}M"
+ZSH_THEME_GIT_PROMPT_DELETED="%{$fg[red]%}D"
+ZSH_THEME_GIT_PROMPT_RENAMED="%{$fg[green]%}R"
+ZSH_THEME_GIT_PROMPT_UNMERGED="%{$fg[red]%}U"
+ZSH_THEME_GIT_PROMPT_UNTRACKED="%{$fg[red]%}?"
 
 #export PROMPT=$'$(host_prompt_color)%n@%m:%~$(git_prompt_info)$ %{$fg[white]%}'
 if [ "$(whoami)" = "root" ]; then NCOLOR="red"; else NCOLOR="white"; fi
 
-PROMPT='%{$fg[$NCOLOR]%}%B%n%b%{$reset_color%}:%{$fg[blue]%}%B%c/%b%{$reset_color%} $(git_prompt_info) $(host_prompt_color)%(!.#.$)%{$reset_color%} '
-RPROMPT='[%*]'
+PROMPT='%{$fg[$NCOLOR]%}%n:%{$reset_color%}%{$fg[green]%}%c%{$reset_color%} $(host_prompt_color)%(!.#.$)%{$reset_color%} '
+RPROMPT='$(git_prompt_info)'
+#RPROMPT='[%*]'
 
 # LS colors, made with http://geoff.greer.fm/lscolors/
 # BSD
