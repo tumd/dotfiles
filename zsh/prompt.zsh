@@ -104,7 +104,7 @@ ZSH_THEME_GIT_PROMPT_UNTRACKED="%{$fg[red]%}?"
 #export PROMPT=$'$(host_prompt_color)%n@%m:%~$(git_prompt_info)$ %{$fg[white]%}'
 if [ "$(whoami)" = "root" ]; then NCOLOR="red"; else NCOLOR="white"; fi
 
-PROMPT='%{$fg[$NCOLOR]%}%n$(host_prompt_color):%{$reset_color%}%{$fg[green]%}%c %(!.#.$)%{$reset_color%} '
+PROMPT='%{$fg[$NCOLOR]%}%n%{$reset_color%}$(host_prompt_color):%{$reset_color%}%{$fg[green]%}%c %(!.#.$)%{$reset_color%} '
 RPROMPT='$(git_prompt_info)'
 #RPROMPT='[%*]'
 
