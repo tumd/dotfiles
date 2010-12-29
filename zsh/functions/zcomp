@@ -1,0 +1,8 @@
+# Stolen from https://github.com/gregf/dotfiles/blob/master/zsh/functions.zsh
+# Recompiles .zshrc
+autoload -U zrecompile
+[ -f ~/.zshrc ] && zrecompile -p ~/.zshrc
+[ -f ~/.zcompdump ] && zrecompile -p ~/.zcompdump
+[ -f ~/.zshrc.zwc.old ] && rm -f ~/.zshrc.zwc.old
+[ -f ~/.zcompdump.zwc.old ] && rm -f ~/.zcompdump.zwc.old
+source ~/.zshrc

@@ -13,6 +13,7 @@ autoload -U ~/.dotfiles/zsh/functions/*(:t)
 
 
 alias g='git'
+alias nano='nano -wK'
 
 # cdpath=(~ ~/Projects/apps ~/Projects/tools ~/Projects/plugins ~/Projects/sites)
 
