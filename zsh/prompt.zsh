@@ -78,17 +78,28 @@ colors
 # than if we're on a local machine
 
 host_prompt_color() {
-  case ${SSH_CLIENT} in 
-    [0-9]*)
-      echo "@%m:"
-    ;;;
-    
-    *)
-      echo ":"
-    ;;;
-  esac
+#       if [[ ! -z "$SSH_CLIENT" -o "$(whoami)" = "root" ]]; then
+        if [[ "$(whoami)" = "root" ]]; then
+                echo "@%m:"
+        else
+                echo ":"
+        fi
 }
-#blupp
+
+
+
+#host_prompt_color() {
+#  case ${SSH_CLIENT} in 
+#    [0-9]*)
+#      echo "@%m:"
+#    ;;;
+#    
+#    *)
+#      echo ":"
+#    ;;;
+#  esac
+#}
+##blupp
 # git theming
 ZSH_THEME_GIT_PROMPT_PREFIX="%{$fg[green]%}<%{$fg[white]%}git%{$fg[green]%}:%{$reset_color%}"
 ZSH_THEME_GIT_PROMPT_SUFFIX="%{$fg[green]%}>%{$reset_color%}"
@@ -101,10 +112,21 @@ ZSH_THEME_GIT_PROMPT_RENAMED="%{$fg[green]%}R"
 ZSH_THEME_GIT_PROMPT_UNMERGED="%{$fg[red]%}U"
 ZSH_THEME_GIT_PROMPT_UNTRACKED="%{$fg[red]%}?"
 
-#export PROMPT=$'$(host_prompt_color)%n@%m:%~$(git_prompt_info)$ %{$fg[white]%}'
-if [ "$(whoami)" = "root" ]; then NCOLOR="red"; else NCOLOR="white"; fi
+user_n_host() {
+	if [[ ! -z "$SSH_CLIENT" ]]; then
+		echo "%{$fg[white]%}%n@%m:"
+	elif [[ "$(whoami)" = "root" ]]; then
+		echo "%{$fg[red]%}%n%{$fg[white]%}@%m:"
+	else
+		echo "%{$fg[white]%}%n:"
+	fi
+}
 
-PROMPT='%{$fg[$NCOLOR]%}%n%{$reset_color%}$(host_prompt_color)%{$fg[green]%}%c %(!.#.$)%{$reset_color%} '
+
+#export PROMPT=$'$(host_prompt_color)%n@%m:%~$(git_prompt_info)$ %{$fg[white]%}'
+#if [ "$(whoami)" = "root" ]; then NCOLOR="red"; else NCOLOR="white"; fi
+
+PROMPT='$(user_n_host)%{$fg[green]%}%c %(!.#.$)%{$reset_color%} '
 RPROMPT='$(git_prompt_info)'
 #RPROMPT='[%*]'
 
