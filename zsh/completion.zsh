@@ -1,5 +1,5 @@
 autoload -U compinit
-compinit
+compinit -i
 
 # Parses the ssh known_hosts file for previously visited hosts, then offers
 # them for completions in ssh, scp and sftp commands.
