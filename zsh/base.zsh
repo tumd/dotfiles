@@ -14,6 +14,8 @@ autoload -U ~/.dotfiles/zsh/functions/*(:t)
 
 alias g='git'
 alias nano='nano -wK'
+which grc > /dev/null
+if [ $? -eq 0 ]; then alias tail='grc tail'; fi
 
 # cdpath=(~ ~/Projects/apps ~/Projects/tools ~/Projects/plugins ~/Projects/sites)
 
