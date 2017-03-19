@@ -1,5 +1,0 @@
-if [[ "$1" == "" ]]; then
-  irb
-else
-  ruby "$@"
-fi
