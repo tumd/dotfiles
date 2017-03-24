@@ -131,7 +131,7 @@ set listchars+=tab:▸\
 set listchars+=trail:⣿
 set listchars+=extends:»
 set listchars+=precedes:«
-set listchars+=space:·
+"set listchars+=space:· " Does not work in vim 7.4
 set listchars+=eol:¬
 
 " COMMANDS
