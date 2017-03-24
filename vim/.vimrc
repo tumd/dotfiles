@@ -27,6 +27,11 @@ set modelines=0
 " hide buffers, not close them
 set hidden
 
+" maintain undo history between sessions
+set undofile
+set undodir=~/.vim/undo
+set noswapfile
+
 " Display all matching files when we tab complete
 set wildmenu
 " - Hit tab to :find by partial match
@@ -54,27 +59,35 @@ set infercase
 " the /g flag on :s substitutions by default
 set gdefault
 
-" make backspace behave in a sane manner
-set backspace=indent,eol,start
-
 " searching
 set hlsearch
 set incsearch
 
-" use indents of 4 spaces
-set shiftwidth=2
+" Tabs % Spaces
 
-" tabs are spaces, not tabs
-set expandtab
+set shiftwidth=2  " use indents of 2 spaces
+set tabstop=2     " an indentation every 2 columns
+set softtabstop=2 " let backspace delete indent
+set expandtab     " tabs are spaces, not tabs
 
-" an indentation every four columns
-set tabstop=2
+set autoindent    " enable auto indentation
 
-" let backspace delete indent
-set softtabstop=2
+" make backspace behave in a sane manner
+set backspace=indent,eol,start
 
-" enable auto indentation
-set autoindent
+nmap _$ :call Preserve("%s/\\s\\+$//e")<CR>   " Strip trailing spaces
+nmap _= :call Preserve("normal gg=G")<CR>     " Fix indent
+
+" Indent/deindent with tab/shift+tab in command mode
+noremap <S-Tab> <<
+noremap <Tab> >>
+" Indent/deindent with tab/shift+tab in visual or select mode
+vnoremap <S-Tab> <gv
+vnoremap <Tab> >gv
+
+" Syntax of these languages is fussy over tabs Vs spaces
+autocmd FileType make setlocal ts=8 sts=8 sw=8 noexpandtab
+autocmd FileType yaml setlocal ts=2 sts=2 sw=2 expandtab
 
 " INTERFACE
 " =========
@@ -88,13 +101,15 @@ set shortmess+=I
 " syntax highlighting
 syntax on
 set synmaxcol=80
-filetype plugin indent on
 
 " stop unnecessary rendering
 set lazyredraw
 
 " show line numbers
 set number
+
+" show command in bottom bar
+set showcmd
 
 " no line wrapping
 set nowrap
@@ -128,8 +143,25 @@ command! MakeTags !ctags -R .
 " - Use g^] for ambiguous tags
 " - Use ^t to jump back up the tag stack
 
+" Reload vimrc
 command! Reload :source $MYVIMRC
+
+" Leader Shortcuts
+let mapleader=","       " leader is comma
+
+" Show invisibles
+nmap <leader>l :set list!<CR>
 
 set ttyfast                     " faster redraw
 set backspace=indent,eol,start
-
+function! Preserve(command)
+  " Preparation: save last search, and cursor position.
+  let _s=@/
+  let l = line(".")
+  let c = col(".")
+  " Do the business:
+  execute a:command
+  " Clean up: restore previous search history, and cursor position
+  let @/=_s
+  call cursor(l, c)
+endfunction 

@@ -1,3 +1,5 @@
+# Mostly borrowed from https://github.com/xero/dotfiles
+
 #managing
 i manage mine with [gnu stow](http://www.gnu.org/software/stow/), a free, portable, lightweight symlink farm manager. this allows me to keep a versioned directory of all my config files that are virtually linked into place via a single command. this makes sharing these files among many users (root) and computers super simple. and does not clutter your home directory with version control files.
 
