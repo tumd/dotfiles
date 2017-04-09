@@ -2,6 +2,35 @@
   lg = log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --
   patch = !git --no-pager diff --no-color
 
+[merge]
+  ff = only
+  # I pretty much never mean to do a real merge, since I use a rebase workflow.
+  # Note: this global option applies to all merges, including those done during a git pull
+  # https://git-scm.com/docs/git-config#git-config-mergeff
+  # https://gist.github.com/scottnonnenberg/fefa3f65fdb3715d25882f3023b31c29
+
+  conflictstyle = diff3
+  # Standard diff is two sets of final changes. This introduces the original text before each side's changes.
+  # https://git-scm.com/docs/git-config#git-config-mergeconflictStyle
+
+[push]
+  default = simple
+  # "push the current branch back to the branch whose changes are usually integrated into the current branch"
+  # "refuse to push if the upstream branch’s name is different from the local one"
+  # https://git-scm.com/docs/git-config#git-config-pushdefault
+  # https://gist.github.com/scottnonnenberg/fefa3f65fdb3715d25882f3023b31c29
+
+[status]
+  showUntrackedFiles = all
+  # Sometimes a newly-added folder, since it's only one line in git status, can slip under the radar.
+  # https://git-scm.com/docs/git-config#git-config-statusshowUntrackedFiles
+
+[transfer]
+  fsckobjects = true
+  # To combat repository corruption!
+  # Note: this global option applies during receive and transmit
+  # https://git-scm.com/docs/git-config#git-config-transferfsckObjects
+  # via https://groups.google.com/forum/#!topic/binary-transparency/f-BI4o8HZW0
 
 [pager]
   diff = diff-so-fancy | less --tabs=2 -RFXMi
