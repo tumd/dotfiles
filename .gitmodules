@@ -13,3 +13,6 @@
 [submodule "git/bin/bundle/diff-so-fancy"]
 	path = git/bin/bundle/diff-so-fancy
 	url = https://github.com/so-fancy/diff-so-fancy.git
+[submodule "shell/.zsh/bundle/grml-etc-core"]
+	path = shell/.zsh/bundle/grml-etc-core
+	url = https://github.com/grml/grml-etc-core.git
