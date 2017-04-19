@@ -10,9 +10,6 @@
 [submodule "shell/.config/base16-gnome-terminal"]
 	path = shell/.config/base16-gnome-terminal
 	url = https://github.com/aaron-williamson/base16-gnome-terminal.git
-[submodule "git/bin/diff-so-fancy"]
-	path = git/bin/diff-so-fancy
-	url = git@github.com:so-fancy/diff-so-fancy.git
 [submodule "git/bin/bundle/diff-so-fancy"]
 	path = git/bin/bundle/diff-so-fancy
-	url = git@github.com:so-fancy/diff-so-fancy.git
+	url = https://github.com/so-fancy/diff-so-fancy.git
