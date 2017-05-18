@@ -27,6 +27,9 @@ set modelines=0
 " hide buffers, not close them
 set hidden
 
+" Disable mouse
+set mouse=
+
 " maintain undo history between sessions
 set undofile
 set undodir=~/.vim/undo
