@@ -74,6 +74,7 @@ set softtabstop=2 " let backspace delete indent
 set expandtab     " tabs are spaces, not tabs
 
 set autoindent    " enable auto indentation
+set formatoptions-=cro " dont continue with comment after enter in insert or o/O
 
 " make backspace behave in a sane manner
 set backspace=indent,eol,start
