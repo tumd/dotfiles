@@ -19,3 +19,9 @@
 [submodule "vim/.vim/bundle/syntastic"]
     path = vim/.vim/bundle/syntastic
     url = https://github.com/vim-syntastic/syntastic.git
+[submodule "shell/.zsh/bundle/zsh-completions"]
+	path = shell/.zsh/bundle/zsh-completions
+	url = https://github.com/zsh-users/zsh-completions
+[submodule "shell/.zsh/bundle/zsh-syntax-highlighting"]
+	path = shell/.zsh/bundle/zsh-syntax-highlighting
+	url = https://github.com/zsh-users/zsh-syntax-highlighting.git
