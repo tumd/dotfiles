@@ -98,7 +98,7 @@ interval=30
 
 [bandwidth]
 label=↓↑
-command=~/.config/i3blocks/scripts/bandwidth2/bandwidth2 -i enp3s0 -w 9216000:9216000 -c 9728000:9728000
+command=$HOME/bin/i3/bandwidth2/bandwidth2 -i enp3s0 -w 9216000:9216000 -c 9728000:9728000
 instance=enp3s0
 interval=persist
 markup=pango
@@ -127,7 +127,7 @@ markup=pango
 #signal=10
 
 [volume-pulseaudio]
-command=~/.config/i3blocks/scripts/volume-pulseaudio/volume-pulseaudio -c '#585858' -f 3 -F 3
+command=$HOME/bin/i3/volume-pulseaudio/volume-pulseaudio -c '#585858' -f 3 -F 3
 interval=once
 signal=1
 

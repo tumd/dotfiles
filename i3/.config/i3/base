@@ -13,7 +13,7 @@
 # sleep-lock
 # screensaver on after 180s = locked
 exec --no-startup-id xset s 180 180
-exec --no-startup-id xss-lock -- i3lock -k -n --ignore-empty-password --show-failed-attempts -c f8f8f8
+exec --no-startup-id xss-lock -- i3lock -k --ignore-empty-password --show-failed-attempts -S 1 -s --insidecolor=565656ff --ringcolor=565656ff --blur 5
 # compton composite manager
 exec --no-startup-id compton
 
@@ -143,16 +143,26 @@ mode "resize" {
         # Pressing right will grow the window’s width.
         # Pressing up will shrink the window’s height.
         # Pressing down will grow the window’s height.
-        bindsym j resize shrink width 10 px or 10 ppt
-        bindsym k resize grow height 10 px or 10 ppt
-        bindsym l resize shrink height 10 px or 10 ppt
-        bindsym odiaeresis resize grow width 10 px or 10 ppt
+#        bindsym j resize shrink width 10 px or 10 ppt
+#        bindsym k resize grow height 10 px or 10 ppt
+#        bindsym l resize shrink height 10 px or 10 ppt
+#        bindsym odiaeresis resize grow width 10 px or 10 ppt
+#
+#        # same bindings, but for the arrow keys
+#        bindsym Left resize shrink width 10 px or 10 ppt
+#        bindsym Down resize grow height 10 px or 10 ppt
+#        bindsym Up resize shrink height 10 px or 10 ppt
+#        bindsym Right resize grow width 10 px or 10 ppt
 
-        # same bindings, but for the arrow keys
-        bindsym Left resize shrink width 10 px or 10 ppt
-        bindsym Down resize grow height 10 px or 10 ppt
-        bindsym Up resize shrink height 10 px or 10 ppt
-        bindsym Right resize grow width 10 px or 10 ppt
+        bindsym Left	exec $HOME/bin/i3/i3-smart-resize "Left"	"1 px or 1 ppt"
+        bindsym Right	exec $HOME/bin/i3/i3-smart-resize "Right" "1 px or 1 ppt"
+        bindsym Up 		exec $HOME/bin/i3/i3-smart-resize "Up" 		"1 px or 1 ppt"
+        bindsym Down 	exec $HOME/bin/i3/i3-smart-resize "Down" 	"1 px or 1 ppt"
+
+        bindsym j	exec $HOME/bin/i3/i3-smart-resize "Left"	"1 px or 1 ppt"
+        bindsym k	exec $HOME/bin/i3/i3-smart-resize "Right" "1 px or 1 ppt"
+        bindsym l exec $HOME/bin/i3/i3-smart-resize "Up" 		"1 px or 1 ppt"
+        bindsym odiaeresis 	exec $HOME/bin/i3/i3-smart-resize "Down" 	"1 px or 1 ppt"
 
         # back to normal: Enter or Escape
         bindsym Return mode "default"
@@ -163,9 +173,9 @@ bindsym $mod+r mode "resize"
 
 # Media Keys
 bindsym XF86Tools  exec --no-startup-id playerctl play-pause
-bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume 0 +5% && pkill -RTMIN+1 i3blocks # increase sound volume
-bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume 0 -5% && pkill -RTMIN+1 i3blocks # decrease sound volume
-bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute 0 toggle && pkill -RTMIN+1 i3blocks # mute sound
+bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ +5% && pkill -RTMIN+1 i3blocks # increase sound volume
+bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ -5% && pkill -RTMIN+1 i3blocks # decrease sound volume
+bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute @DEFAULT_SINK@ toggle && pkill -RTMIN+1 i3blocks # mute sound
 
 # Cycle through active workspaces
 bindsym $mod+ctrl+Right workspace next
@@ -175,7 +185,7 @@ bindsym $mod+ctrl+Left workspace prev
 focus_follows_mouse no
 
 # Lock screen shortcut
-bindsym $mod+ctrl+l exec i3lock -k --ignore-empty-password --show-failed-attempts -c f8f8f8
+bindsym $mod+ctrl+l exec i3lock -k --ignore-empty-password --show-failed-attempts -S 1 -s --insidecolor=565656ff --ringcolor=565656ff --blur 5
 
 #### RULES FOR SPECIFIC APPLICATIONS ####
 
@@ -197,8 +207,8 @@ bindsym $mod+ctrl+l exec i3lock -k --ignore-empty-password --show-failed-attempt
 # Tip: To find out what these values might be run:
 #       xprop | grep -i 'role'#
 #for_window [window_role="conversation"] floating enable, border normal
-for_window [window_role="Msgcompose"] floating enable, border normal # Thunderbird compose
-for_window [window_role="EventDialog"] floating enable, border normal # Thunderbird Event
+#for_window [window_role="Msgcompose"] floating enable, border normal # Thunderbird compose
+#for_window [window_role="EventDialog"] floating enable, border normal # Thunderbird Event
 for_window [window_role="pop-up"] floating enable, border normal # Chrome pop-ups
 
 # Start i3bar to display a workspace bar (plus the system information i3status
