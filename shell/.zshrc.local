@@ -8,6 +8,10 @@ fpath=($fpath ~/.zsh/bundle/zsh-completions/src)
 # ZSH syntax highlighting
 source ~/.zsh/bundle//zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
+# Logout ttyX after inactiviry
+if [[ $(tty) =~ /dev\/tty[1-6] ]]; then TMOUT=1800; fi
+
+#
 # Use sublimetext as default editor
 if check_com -c subl ; then
   export EDITOR='subl -w'
