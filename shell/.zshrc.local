@@ -1,4 +1,8 @@
-export PATH=/usr/local/sbin:${PATH}:${HOME}/bin
+PATH=/usr/local/sbin:${PATH}:${HOME}/bin
+if [[ -d /snap/bin ]]; then
+    PATH="$PATH:/snap/bin"
+fi
+
 BASE16_SHELL=${HOME}/.config/base16-shell/
 [ -n "$PS1" ] && [ -s $BASE16_SHELL/profile_helper.sh ] && eval "$($BASE16_SHELL/profile_helper.sh)"
 
@@ -19,3 +23,10 @@ unsetopt share_history
 
 # Put history in a host-uniqe file. If binding the same home to multiple instances.
 HISTFILE=${ZDOTDIR:-${HOME}}/.zsh_history-${HOST}
+
+# Aliases
+alias urldecode='python -c "import sys, urllib as ul; \
+      print ul.unquote_plus(sys.argv[1])"'
+
+alias urlencode='python -c "import sys, urllib as ul; \
+      print ul.quote_plus(sys.argv[1])"'
