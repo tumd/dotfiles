@@ -1,3 +1,7 @@
+# Ensure we use english
+export LC_ALL=en_US.UTF-8
+export LANG=en_US.UTF-8
+
 PATH=/usr/local/sbin:${PATH}:${HOME}/bin
 if [[ -d /snap/bin ]]; then
     PATH="$PATH:/snap/bin"
@@ -21,8 +25,12 @@ export EDITOR='vim'
 # Don't append history to other sessions
 unsetopt share_history
 
-# Put history in a host-uniqe file. If binding the same home to multiple instances.
-HISTFILE=${ZDOTDIR:-${HOME}}/.zsh_history-${HOST}
+# Cleanup from old config.
+if [[ -f "${ZDOTDIR:-${HOME}}/.zsh_history-${HOST}" ]];
+then
+    cat "${ZDOTDIR:-${HOME}}/.zsh_history-${HOST}" >> "${ZDOTDIR:-${HOME}}/.zsh_history"
+    rm "${ZDOTDIR:-${HOME}}/.zsh_history-${HOST}"
+fi
 
 # Aliases
 alias urldecode='python -c "import sys, urllib as ul; \
