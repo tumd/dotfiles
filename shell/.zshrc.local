@@ -1,10 +1,14 @@
 # Ensure we use english
 export LC_ALL=en_US.UTF-8
 export LANG=en_US.UTF-8
+export LESSCHARSET=utf-8
 
-PATH=/usr/local/sbin:${PATH}:${HOME}/bin
+PATH=${HOME}/bin:/usr/local/sbin:${PATH}
 if [[ -d /snap/bin ]]; then
-    PATH="$PATH:/snap/bin"
+    PATH="/snap/bin:$PATH"
+fi
+if [[ -d "$HOME/.local/bin" ]]; then
+    PATH="$HOME/.local/bin:$PATH"
 fi
 
 BASE16_SHELL=${HOME}/.config/base16-shell/
@@ -15,6 +19,14 @@ fpath=(~/.zsh/bundle/zsh-completions/src $fpath)
 
 # ZSH syntax highlighting
 source ~/.zsh/bundle/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+
+# ZSH history like fish
+source ~/.zsh/bundle/zsh-history-substring-search/zsh-history-substring-search.zsh
+
+if vault --version >/dev/null 2>&1; then
+  autoload -U +X bashcompinit && bashcompinit
+  complete -o nospace -C vault vault
+fi
 
 # Logout ttyX after inactiviry
 if [[ $(tty) =~ /dev\/tty[1-6] ]]; then TMOUT=1800; fi
@@ -38,3 +50,11 @@ alias urldecode='python -c "import sys, urllib as ul; \
 
 alias urlencode='python -c "import sys, urllib as ul; \
       print ul.quote_plus(sys.argv[1])"'
+
+# Setup a prompt "item" based on VIRTUAL_ENV
+function virtual_env_prompt () {
+  REPLY=${VIRTUAL_ENV+(venv!) }
+}
+grml_theme_add_token virtual-env -f virtual_env_prompt '%F{red}' '%f'
+zstyle ':prompt:grml:left:setup' items rc change-root user at host path virtual-env vcs percent
+export VIRTUAL_ENV_DISABLE_PROMPT=True

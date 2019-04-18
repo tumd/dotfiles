@@ -36,10 +36,11 @@ markup=none
 # This displays "ARTIST - SONG" if a music is playing.
 # Supported players are: spotify, vlc, audacious, xmms2, mplayer, and others.
 [mediaplayer]
+command=$HOME/bin/i3/mediaplayer
 label=♪
 interval=5
-separator=true
-#instance=spotify
+#separator=true
+instance=spotify
 #signal=10
 
 [separator]
@@ -98,19 +99,36 @@ interval=30
 
 [bandwidth]
 label=↓↑
-command=$HOME/bin/i3/bandwidth2/bandwidth2 -i enp3s0 -w 9216000:9216000 -c 9728000:9728000
-instance=enp3s0
+command=$HOME/bin/i3/bandwidth2/bandwidth2 -i eth1 -w 9216000:9216000 -c 9728000:9728000
+instance=eth1
 interval=persist
 markup=pango
 
+[separator]
+
+[volume-pulseaudio]
+command=$HOME/bin/i3/volume-pulseaudio/volume-pulseaudio -c '#585858' -f 3 -F 3
+interval=once
+signal=1
+
+[separator]
+#
 # Battery indicator
 #
 # The battery instance defaults to 0.
+
 #[battery]
 #label=BAT
 #label=⚡
 #instance=1
 #interval=30
+
+[battery2]
+command=$HOME/bin/i3//battery2
+markup=pango
+interval=30
+
+[separator]
 
 # Volume indicator
 #
@@ -125,11 +143,6 @@ markup=pango
 ##instance=PCM
 #interval=once
 #signal=10
-
-[volume-pulseaudio]
-command=$HOME/bin/i3/volume-pulseaudio/volume-pulseaudio -c '#585858' -f 3 -F 3
-interval=once
-signal=1
 
 # Date Time
 #

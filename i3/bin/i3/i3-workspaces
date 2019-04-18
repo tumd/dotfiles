@@ -1,0 +1,64 @@
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+
+import os
+import sys
+import i3ipc
+import pickle
+
+USER_HOME = os.path.expanduser('~')
+I3_SAVE_DIR = os.path.join(USER_HOME, '.config/i3/')
+WS_SAVE_FILE = os.path.join(I3_SAVE_DIR, 'workspace_map')
+
+
+def show_help():
+    print('Usage: {} [save|restore]'.format(sys.argv[0]))
+    sys.exit(1)
+
+
+if __name__ == '__main__':
+    if len(sys.argv) < 2:
+        show_help()
+
+    if not os.path.exists(I3_SAVE_DIR):
+        os.makedirs(I3_SAVE_DIR, 0755)
+
+    try:
+        # Connect to i3 session
+        i3 = i3ipc.Connection()
+    except:
+        print('Unable to connect to i3 session')
+        sys.exit(1)
+
+    if sys.argv[1] == 'save':
+        try:
+            workspaces = i3.get_workspaces()
+            with open(WS_SAVE_FILE, 'wb') as f:
+                pickle.dump(workspaces, f)
+        except:
+            print('Unable to save workspaces.')
+            sys.exit(1)
+
+    elif sys.argv[1] == 'restore':
+        try:
+            with open(WS_SAVE_FILE, 'rb') as f:
+                workspaces = pickle.load(f)
+        except:
+            print('Unable to load workspaces from {}'.format(WS_SAVE_FILE))
+            sys.exit(1)
+
+        for ws in workspaces:
+            # Jump to the ws
+            i3.command('workspace {}'.format(ws['name']))
+            # send it to the right monitor
+            i3.command('move workspace to output {}'.format(ws['output']))
+        # Filter out the workspaces that were visible when saved
+        # and restore this state, ie focus on the same ones that were focsed
+        # when the state was saved.
+        '''
+        for ws in filter(lambda w: w['visible'], workspaces):
+            i3.command('workspace {}'.format(ws['name']))
+        '''
+    else:
+        show_help()
+

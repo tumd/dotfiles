@@ -28,3 +28,6 @@
 [submodule "shell/.tmux/plugins/tpm"]
 	path = shell/.tmux/plugins/tpm
 	url = https://github.com/tmux-plugins/tpm
+[submodule "shell/.zsh/bundle/zsh-history-substring-search"]
+	path = shell/.zsh/bundle/zsh-history-substring-search
+	url = https://github.com/zsh-users/zsh-history-substring-search.git
