@@ -23,6 +23,9 @@ source ~/.zsh/bundle/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 # ZSH history like fish
 source ~/.zsh/bundle/zsh-history-substring-search/zsh-history-substring-search.zsh
 
+# ZSH autosuggestions like fish
+source ~/.zsh/bundle/zsh-autosuggestions/zsh-autosuggestions.zsh
+
 if vault --version >/dev/null 2>&1; then
   autoload -U +X bashcompinit && bashcompinit
   complete -o nospace -C vault vault
