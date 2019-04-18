@@ -5,10 +5,10 @@ export LESSCHARSET=utf-8
 
 PATH=${HOME}/bin:/usr/local/sbin:${PATH}
 if [[ -d /snap/bin ]]; then
-    PATH="/snap/bin:$PATH"
+  PATH="/snap/bin:$PATH"
 fi
 if [[ -d "$HOME/.local/bin" ]]; then
-    PATH="$HOME/.local/bin:$PATH"
+  PATH="$HOME/.local/bin:$PATH"
 fi
 
 BASE16_SHELL=${HOME}/.config/base16-shell/
@@ -40,8 +40,8 @@ unsetopt share_history
 # Cleanup from old config.
 if [[ -f "${ZDOTDIR:-${HOME}}/.zsh_history-${HOST}" ]];
 then
-    cat "${ZDOTDIR:-${HOME}}/.zsh_history-${HOST}" >> "${ZDOTDIR:-${HOME}}/.zsh_history"
-    rm "${ZDOTDIR:-${HOME}}/.zsh_history-${HOST}"
+  cat "${ZDOTDIR:-${HOME}}/.zsh_history-${HOST}" >> "${ZDOTDIR:-${HOME}}/.zsh_history"
+  rm "${ZDOTDIR:-${HOME}}/.zsh_history-${HOST}"
 fi
 
 # Aliases
@@ -58,3 +58,9 @@ function virtual_env_prompt () {
 grml_theme_add_token virtual-env -f virtual_env_prompt '%F{red}' '%f'
 zstyle ':prompt:grml:left:setup' items rc change-root user at host path virtual-env vcs percent
 export VIRTUAL_ENV_DISABLE_PROMPT=True
+
+# Include host-specific zshrc
+if [[ -f "${ZDOTDIR:-${HOME}}/.zshrc.${HOST}" ]]; then
+  source "${ZDOTDIR:-${HOME}}/.zshrc.${HOST}"
+fi
+
