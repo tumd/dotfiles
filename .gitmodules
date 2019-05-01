@@ -9,7 +9,7 @@
   url = https://github.com/chriskempson/base16-shell.git
 [submodule "shell/.config/base16-gnome-terminal"]
   path = shell/.config/base16-gnome-terminal
-  erl = https://github.com/aaron-williamson/base16-gnome-terminal.git
+  url = https://github.com/aaron-williamson/base16-gnome-terminal.git
 [submodule "git/bin/bundle/diff-so-fancy"]
   path = git/bin/bundle/diff-so-fancy
   url = https://github.com/so-fancy/diff-so-fancy.git
@@ -32,5 +32,5 @@
   path = shell/.zsh/bundle/zsh-history-substring-search
   url = https://github.com/zsh-users/zsh-history-substring-search.git
 [submodule "shell/.zsh/bundle/zsh-autosuggestions"]
-	path = shell/.zsh/bundle/zsh-autosuggestions
-	url = https://github.com/zsh-users/zsh-autosuggestions
+  path = shell/.zsh/bundle/zsh-autosuggestions
+  url = https://github.com/zsh-users/zsh-autosuggestions
