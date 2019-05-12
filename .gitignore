@@ -1,3 +1,4 @@
-shell/.tmux/plugins/*
-i3/.config/i3/workspace_map
-i3/.config/i3/config
+.tmux/plugins/*
+.config/i3/workspace_map
+.config/i3/config
+.yadm/repo.git/
