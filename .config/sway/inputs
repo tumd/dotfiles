@@ -1,0 +1,29 @@
+# Inputs
+# Keyboards
+input type:keyboard {
+  # Swedish layout, always.
+  xkb_layout se
+  # Enable numlock on all keyboards
+  xkb_numlock enabled
+}
+
+# Laptop
+input 1:1:AT_Translated_Set_2_keyboard {
+  # Swedish layout, always.
+  xkb_layout se
+  # Do NOT enable numlock on the laptop's keyboard
+  xkb_numlock disabled
+}
+
+# Trackpad
+input type:touchpad {
+  # Scroll like it's a phone
+  natural_scroll enabled
+  # Slow the scrolling
+  scroll_factor 0.5
+}
+
+# Mouse
+input type:pointer {
+  #scroll_button BTN_MIDDLE
+}

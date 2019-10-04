@@ -1,0 +1,28 @@
+#!/usr/bin/env python
+# https://github.com/sjoerdtimmer/swaylock-blur-multimonitor/blob/master/swaylock-blur
+import subprocess
+import tempfile
+import os
+import sys
+
+import i3ipc.i3ipc
+i3 = i3ipc.Connection()
+outputs = [x['name'] for x in i3.get_outputs()]
+images = [tempfile.mktemp() for _ in outputs]
+lockcmd = ["swaylock"]
+lockcmd.extend(["-c", "000000"])
+
+# take the screenshots
+for output,image in zip(outputs, images):
+#    subprocess.call(["grim", "-o", output, image])
+    subprocess.call(["grim", "-s", "0.05", "-o", output, image])
+    #subprocess.call(["convert", image, "-blur", "0x8", image])
+    lockcmd.extend(["-i", output+":"+image])
+
+# lock the screen
+lockcmd.extend(sys.argv[1:])
+subprocess.call(lockcmd)
+
+# cleanup
+for img in images:
+  os.remove(img)

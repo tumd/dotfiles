@@ -1,0 +1,42 @@
+# Laptop (left) eDP-1
+output "Unknown 0x057F 0x00000000" {
+  pos 0 1080
+  mode 1920x1080@120Hz
+  bg /usr/share/backgrounds/sway/Sway_Wallpaper_Blue_1920x1080.png fill
+}
+
+# Work (middle) DP-3
+output "Dell Inc. DELL U2518D 3C4YP8BR663L" {
+  pos 1920 720
+  mode 2560x1440@60Hz
+  bg /usr/share/backgrounds/sway/Sway_Wallpaper_Blue_2048x1536.png fill
+}
+# Work (right) DP-4
+output "Dell Inc. DELL U2715H GH85D63F0FPS" {
+  pos 4480 0
+  mode 2560x1440@60Hz
+  transform 90
+  bg /usr/share/backgrounds/sway/Sway_Wallpaper_Blue_2048x1536_Portrait.png fill
+}
+
+# Home (right) HDMI-A-1
+output "Ancor Communications Inc ASUS VG278HR C5LMTF010923" {
+  pos 1920 1080
+  mode 1920x1080@60Hz
+  bg /usr/share/backgrounds/sway/Sway_Wallpaper_Blue_1920x1080.png fill
+}
+
+# Other HDMI (right)
+output HDMI-A-1 {
+  pos 1920 1080
+  bg /usr/share/backgrounds/sway/Sway_Wallpaper_Blue_1920x1080.png fill
+}
+
+# Define what workspace going on what screen
+workspace 1 output "Dell Inc. DELL U2518D 3C4YP8BR663L" "Ancor Communications Inc ASUS VG278HR C5LMTF010923" "Unknown 0x057F 0x00000000"
+workspace 2 output "Dell Inc. DELL U2518D 3C4YP8BR663L" "Ancor Communications Inc ASUS VG278HR C5LMTF010923" "Unknown 0x057F 0x00000000"
+workspace 3 output "Dell Inc. DELL U2518D 3C4YP8BR663L" "Ancor Communications Inc ASUS VG278HR C5LMTF010923" "Unknown 0x057F 0x00000000"
+workspace 4 output "Unknown 0x057F 0x00000000"
+workspace 5 output "Unknown 0x057F 0x00000000"
+workspace 6 output "Dell Inc. DELL U2715H GH85D63F0FPS" "Unknown 0x057F 0x00000000"
+workspace 7 output "Dell Inc. DELL U2715H GH85D63F0FPS" "Unknown 0x057F 0x00000000"
