@@ -54,6 +54,9 @@ set wildignore+=*.doc,*.pdf,*.cbr,*.cbz
 set wildignore+=*.zip,*.tar.gz,*.tar.bz2,*.rar,*.tar.xz,*.kgb
 set wildignore+=*.swp,.lock,.DS_Store,._*   
 
+" treat numbers as decimal
+set nrformats=
+
 " case insensitive search
 set ignorecase
 set smartcase
@@ -95,6 +98,10 @@ autocmd FileType yaml setlocal ts=2 sts=2 sw=2 expandtab
 
 " INTERFACE
 " =========
+
+" Always show tab-bar
+set showtabline=2
+
 
 " show matching brackets/parenthesis
 set showmatch

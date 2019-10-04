@@ -62,7 +62,7 @@ function dedicated_gpu()
         return string.find(r.stdout, "Chipset Model: Radeon") ~= nil or string.find(r.stdout, "Chipset Model: NVIDIA GeForce") ~= nil
     -- Untested
     elseif is_linux then
-        local r = exec({"lshw", "-C", 'display'})
+        local r = exec({"lspci"})
         r.stdout = string.lower(r.stdout)
         return string.find(r.stdout, "amd") ~= nil or string.find(r.stdout, "nvidia") ~= nil
     elseif is_windows then

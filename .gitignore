@@ -1,4 +1,16 @@
-.tmux/plugins/*
-.config/i3/workspace_map
-.config/i3/config
-.yadm/repo.git/
+# Ignore everything
+/*
+# Except files/folders starting with a dot (.)
+!/.*
+!/bin
+
+# The rest
+/.tmux/plugins/*
+/.config/i3/workspace_map
+/.config/i3/config
+/.yadm/repo.git/
+*cache*
+*Cache*
+/.mozilla
+/.thunderbird
+/.local

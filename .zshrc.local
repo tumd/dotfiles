@@ -1,18 +1,8 @@
-# Ensure we use english
-export LC_ALL=en_US.UTF-8
-export LANG=en_US.UTF-8
-export LESSCHARSET=utf-8
-
-PATH=${HOME}/bin:/usr/local/sbin:${PATH}
-if [[ -d /snap/bin ]]; then
-  PATH="/snap/bin:$PATH"
-fi
-if [[ -d "$HOME/.local/bin" ]]; then
-  PATH="$HOME/.local/bin:$PATH"
-fi
-
-BASE16_SHELL=${HOME}/.config/base16-shell/
-[ -n "$PS1" ] && [ -s $BASE16_SHELL/profile_helper.sh ] && eval "$($BASE16_SHELL/profile_helper.sh)"
+# Base16 Shell
+BASE16_SHELL="$HOME/.config/base16-shell/"
+[ -n "$PS1" ] && \
+    [ -s "$BASE16_SHELL/profile_helper.sh" ] && \
+        eval "$("$BASE16_SHELL/profile_helper.sh")"
 
 # ZSH completions
 fpath=(~/.zsh/bundle/zsh-completions/src $fpath)
