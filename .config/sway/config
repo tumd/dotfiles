@@ -46,9 +46,9 @@ bindsym $mod+Shift+q kill
 
 # Launcher
 # From https://git.sr.ht/~emersion/dotfiles/tree/master/.config/sway/config
-set $launcher dmenu_path | fzf | xargs swaymsg exec
-bindsym $mod+d exec termite --name launcher -e "sh -c \'$launcher\'"
-for_window [app_id="^launcher$"] floating enable, border none
+# and https://github.com/enkore/j4-dmenu-desktop/issues/48#issuecomment-493730345
+bindsym $mod+d exec termite --name launcher -e "sh -c \ '~/.config/sway/j4dd_wrapper.sh\'"
+for_window [app_id="^launcher$"] floating enable, border pixel 2
 
 # change focus
 bindsym $mod+j focus left
