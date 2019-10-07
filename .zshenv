@@ -23,6 +23,10 @@
 if [[ $SHLVL == 1 && ! -o LOGIN ]]; then
     [[ -r ~/.zpath ]] && source ~/.zpath
 
+    if [[ -d "$HOME/bin" ]]; then
+      PATH="$HOME/bin:$PATH"
+    fi
+
     # Used by pipenv (and other?)
     if [[ -d "$HOME/.local/bin" ]]; then
       PATH="$HOME/.local/bin:$PATH"
