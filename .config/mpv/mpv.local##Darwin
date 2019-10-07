@@ -1,0 +1,2 @@
+autofit-larger=100%x95%                 # resize window in case it's larger than W%xH% of the screen
+geometry=50%+100%+50                    # force starting with centered window
