@@ -2,6 +2,10 @@
 " must be first, because it changes other options as a side effect
 set nocompatible
 
+" Ensure utf-8
+scriptencoding utf-8
+set encoding=utf-8
+
 " Load vim-pathogen pluginmgr
 runtime bundle/vim-pathogen/autoload/pathogen.vim
 execute pathogen#infect()

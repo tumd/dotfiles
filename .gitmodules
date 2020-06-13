@@ -4,33 +4,12 @@
 [submodule "vim/.vim/bundle/vim-pathogen"]
 	path = .vim/bundle/vim-pathogen
   url = https://github.com/tpope/vim-pathogen.git
-[submodule "shell/.config/base16-shell"]
-	path = .config/base16-shell
-  url = https://github.com/chriskempson/base16-shell.git
-[submodule "shell/.config/base16-gnome-terminal"]
-	path = .config/base16-gnome-terminal
-  url = https://github.com/aaron-williamson/base16-gnome-terminal.git
 [submodule "git/bin/bundle/diff-so-fancy"]
 	path = bin/bundle/diff-so-fancy
   url = https://github.com/so-fancy/diff-so-fancy.git
-[submodule "shell/.zsh/bundle/grml-etc-core"]
-	path = .zsh/bundle/grml-etc-core
-  url = https://github.com/grml/grml-etc-core.git
 [submodule "vim/.vim/bundle/syntastic"]
 	path = .vim/bundle/syntastic
   url = https://github.com/vim-syntastic/syntastic.git
-[submodule "shell/.zsh/bundle/zsh-completions"]
-	path = .zsh/bundle/zsh-completions
-  url = https://github.com/zsh-users/zsh-completions
-[submodule "shell/.zsh/bundle/zsh-syntax-highlighting"]
-	path = .zsh/bundle/zsh-syntax-highlighting
-  url = https://github.com/zsh-users/zsh-syntax-highlighting.git
 [submodule "shell/.tmux/plugins/tpm"]
 	path = .tmux/plugins/tpm
   url = https://github.com/tmux-plugins/tpm
-[submodule "shell/.zsh/bundle/zsh-history-substring-search"]
-	path = .zsh/bundle/zsh-history-substring-search
-  url = https://github.com/zsh-users/zsh-history-substring-search.git
-[submodule "shell/.zsh/bundle/zsh-autosuggestions"]
-	path = .zsh/bundle/zsh-autosuggestions
-  url = https://github.com/zsh-users/zsh-autosuggestions
