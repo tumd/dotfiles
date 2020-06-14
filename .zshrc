@@ -55,6 +55,7 @@ zstyle ':z4h:fzf-tab' channel none
 z4h install romkatv/archive || return
 z4h install chriskempson/base16-shell || return
 
+z4h source $Z4H/chriskempson/base16-shell/base16-shell.plugin.zsh
 # Install or update core components (fzf, zsh-autosuggestions, etc.) and
 # initialize Zsh. After this point console I/O is unavailable. Everything
 # that requires user interaction or can perform network I/O must be done
@@ -64,7 +65,6 @@ z4h init || return
 
 # Use additional Git repositories pulled in with `z4h install`.
 #
-z4h source $Z4H/chriskempson/base16-shell/base16-shell.plugin.zsh
 
 fpath=($Z4H/romkatv/archive $fpath)
 autoload -Uz archive unarchive lsarchive
