@@ -53,30 +53,21 @@ zstyle ':z4h:fzf-tab' channel none
 # files can be used after `z4h init`.
 
 z4h install romkatv/archive || return
-z4h install belak/zsh-utils || return
 z4h install chriskempson/base16-shell || return
 
-z4h source $Z4H/chriskempson/base16-shell/base16-shell.plugin.zsh
 # Install or update core components (fzf, zsh-autosuggestions, etc.) and
 # initialize Zsh. After this point console I/O is unavailable. Everything
 # that requires user interaction or can perform network I/O must be done
 # above. Everything else is best done below.
 z4h init || return
 
-# Export environment variables.
-export EDITOR=nano
-export GPG_TTY=$TTY
-
-# Extend PATH.
-[[ -d ~/.local/bin ]] && path=(~/.local/bin $path)
-[[ -d ~/bin        ]] && path=(~/bin $path)
-
-fpath=($Z4H/romkatv/archive $fpath)
 
 # Use additional Git repositories pulled in with `z4h install`.
 #
-# This is just an example that you should delete. It doesn't do anything useful.
-#z4h source $Z4H/belak/zsh-utils/editor/editor.plugin.zsh
+z4h source $Z4H/chriskempson/base16-shell/base16-shell.plugin.zsh
+
+fpath=($Z4H/romkatv/archive $fpath)
+autoload -Uz archive unarchive lsarchive
 
 # Source additional local files.
 if [[ $LC_TERMINAL == iTerm2 ]]; then
@@ -94,9 +85,6 @@ zstyle ':zle:(up|down)-line-or-beginning-search' leave-cursor       yes
 # When presented with the list of choices upon hitting Tab, accept selection and
 # trigger another completion with this key binding. Great for completing file paths.
 zstyle ':fzf-tab:*'                              continuous-trigger tab
-
-# Autoload functions.
-autoload -Uz zmv archive unarchive lsarchive
 
 # ZSH dir
 ZSH=${ZSH:-${ZDOTDIR:-$HOME}/.zsh}
