@@ -11,7 +11,7 @@ include colors
 set $mod Mod4
 
 # Font
-font pango:Source Code Pro for Powerline 9
+font pango:Source Code Pro for Powerline, "Twitter Color Emoji" 9
 
 # Locking
 set $swaylock ~/bin/swaylock-fancy -f --ignore-empty-password --indicator-caps-lock --show-failed-attempts --color=233038
@@ -51,10 +51,10 @@ bindsym $mod+d exec termite --name launcher -e "sh -c \ '~/.config/sway/j4dd_wra
 for_window [app_id="^launcher$"] floating enable, border pixel 2
 
 # change focus
-bindsym $mod+j focus left
-bindsym $mod+k focus down
-bindsym $mod+l focus up
-bindsym $mod+odiaeresis focus right
+bindsym $mod+h focus left
+bindsym $mod+j focus down
+bindsym $mod+k focus up
+bindsym $mod+l focus right
 
 # alternatively, you can use the cursor keys:
 bindsym $mod+Left focus left
@@ -87,7 +87,7 @@ bindsym $mod+Ctrl+Shift+Up    move workspace to output up
 bindsym $mod+Ctrl+Shift+Right move workspace to output right
 
 # split in horizontal orientation
-bindsym $mod+h split h
+bindsym $mod+b split h
 
 # split in vertical orientation
 bindsym $mod+v split v
@@ -180,6 +180,8 @@ bindsym $mod+r mode "resize"
 
 # Media Keys
 bindsym XF86AudioPlay exec --no-startup-id playerctl play-pause
+bindsym XF86AudioNext exec --no-startup-id playerctl next
+bindsym XF86AudioPrev exec --no-startup-id playerctl previous
 bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ +5% && pkill -RTMIN+1 i3blocks # increase sound volume
 bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ -5% && pkill -RTMIN+1 i3blocks # decrease sound volume
 bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute @DEFAULT_SINK@ toggle && pkill -RTMIN+1 i3blocks # mute sound
@@ -238,7 +240,8 @@ for_window [window_role="pop-up"] layout stacking, border normal # Chrome pop-up
 # Start i3bar to display a workspace bar (plus the system information i3status
 # finds out, if available)
 bar {
-        status_command i3status
+        swaybar_command waybar
+        #status_command i3status
         #status_command i3blocks
         position top
 
