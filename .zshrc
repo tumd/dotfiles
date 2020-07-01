@@ -90,5 +90,8 @@ zstyle ':fzf-tab:*'                              continuous-trigger tab
 ZSH=${ZSH:-${ZDOTDIR:-$HOME}/.zsh}
 
 () {
-    for config_file ($ZSH/rc/*.zsh) z4h source $config_file
+  for config_file ($ZSH/rc/*.zsh) z4h source $config_file
 }
+
+fpath=($ZSH/completions $fpath)
+z4h source $HOME/.zshrc.$HOST
