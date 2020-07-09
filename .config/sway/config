@@ -11,7 +11,7 @@ include colors
 set $mod Mod4
 
 # Font
-font pango:Source Code Pro for Powerline, "Twitter Color Emoji" 9
+font pango:SauceCodePro Nerd Font, "Twitter Color Emoji" 9
 
 # Locking
 set $swaylock ~/bin/swaylock-fancy -f --ignore-empty-password --indicator-caps-lock --show-failed-attempts --color=233038

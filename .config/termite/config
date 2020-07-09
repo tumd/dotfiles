@@ -2,7 +2,7 @@
 clickable_url = false
 scrollback_lines = 100000
 
-font = Source Code Pro for Powerline 11
+font = SauceCodePro Nerd Font Mono 11
 
 [colors]
 # Base16 Default Dark
