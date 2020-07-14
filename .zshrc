@@ -36,7 +36,7 @@ zstyle ':z4h:'                auto-update-days 28
 zstyle ':z4h:*'               channel          stable
 # Bind alt-arrows or ctrl-arrows to change current directory?
 # The other key modifier will be bound to cursor movement by words.
-zstyle ':z4h:'                cd-key           ctrl
+zstyle ':z4h:'                cd-key           alt
 # Right-arrow key accepts one character ('partial-accept') from
 # command autosuggestions or the whole thing ('accept')?
 zstyle ':z4h:autosuggestions' forward-char     accept
