@@ -53,12 +53,9 @@ zstyle ':zle:(up|down)-line-or-beginning-search' leave-cursor       yes
 # trigger another completion with this key binding. Great for completing file paths.
 zstyle ':fzf-tab:*'                              continuous-trigger tab
 
-# ZSH dir
-ZSH=${ZSH:-${ZDOTDIR:-$HOME}/.zsh}
-
 () {
-  for config_file ($ZSH/rc/*.zsh) z4h source $config_file
+  for config_file ($HOME/.zsh/rc/*.zsh) z4h source $config_file
 }
 
-fpath=($ZSH/completions $fpath)
+fpath=($HOME/.zsh/completions $fpath)
 z4h source "$HOME/.zshrc.$HOST" || true
