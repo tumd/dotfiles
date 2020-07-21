@@ -39,7 +39,8 @@ ssh() {
     # `$ZSH/rc/01-locale.zsh`.
     case "$TERM" in
 	*-*)
-	    LC__ORIGINALTERM=$TERM TERM=${TERM%%-*} LANG=C LC_MESSAGES=C command ssh $extra "$@"
+	    #LC__ORIGINALTERM=$TERM TERM=${TERM%%-*} LANG=C LC_MESSAGES=C command ssh $extra "$@"
+	    LC__ORIGINALTERM=$TERM LANG=C LC_MESSAGES=C command ssh $extra "$@"
 	    ;;
 	*)
 	    LANG=C LC_MESSAGES=C command ssh $extra "$@"
