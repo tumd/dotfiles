@@ -1505,12 +1505,12 @@
 
   function prompt_my_context () {
     if (( P9K_SSH )); then
-      if [[ -n "$SUDO_COMMAND" ]]; then
-        p10k segment -t '%B%F{red}%n%F{white}@%m%f%b'
+      if [[ -n "$SUDO_COMMAND" ]] || (( EUID == 0 )); then
+        p10k segment -t '%B%F{red}%n%f%b@%B%m%b'
       else
-        p10k segment -t '%B%F{blue}%n%F{white}@%m%f%b'
+        p10k segment -t '%B%F{blue}%n%f%b@%B%m%b'
       fi
-    elif [[ -n "$SUDO_COMMAND" ]]; then
+    elif [[ -n "$SUDO_COMMAND" ]] || (( EUID == 0 )); then
       p10k segment -t '%B%F{red}%n%f%b@%m'
     else
       p10k segment -t '%B%F{blue}%n%f%b@%m'
