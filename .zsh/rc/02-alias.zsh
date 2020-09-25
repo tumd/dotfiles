@@ -32,9 +32,13 @@ fi
   alias ip6b='ip -6 -brief'
 }
 
+# Print certificate information for a remote host(:port).
+# First arg is hostname and an alternative port; 1.1.1.1:443
+# Rest of the arguments are passed to `openssl x509`
 (( $+commands[openssl] && ! $+commands[http-cert] )) && function http-cert() {
   _hp=("${(@s/:/)${@[1]:-localhost}}")
+  _defargs="-subject -issuer -dates -ext subjectAltName"
   echo | openssl s_client -connect "$_hp[1]":"${_hp[2]:-443}" -servername "$_hp[1]" 2>/dev/null | \
-    openssl x509 -noout -subject -issuer -dates --ext subjectAltName
-  unset '_hp'
+    openssl x509 -noout "${@[2,-1]:-${=_defargs}}"
+  unset '_hp' '_defarg'
 }
