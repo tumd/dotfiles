@@ -11,7 +11,7 @@
 # into `~-` by ZLE.
 
 is-at-least 4.3.12 && () {
-    MARKPATH=$ZSH/run/marks
+    MARKPATH=$HOME/.zsh/run/marks
 
     # Add some static entries
     hash -d log=/var/log
