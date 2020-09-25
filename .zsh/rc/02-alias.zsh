@@ -31,3 +31,10 @@ fi
   alias ipb='ip -brief'
   alias ip6b='ip -6 -brief'
 }
+
+(( $+commands[openssl] && ! $+commands[http-cert] )) && function http-cert() {
+  _hp=("${(@s/:/)${@[1]:-localhost}}")
+  echo | openssl s_client -connect "$_hp[1]":"${_hp[2]:-443}" -servername "$_hp[1]" 2>/dev/null | \
+    openssl x509 -noout -subject -issuer -dates --ext subjectAltName
+  unset '_hp'
+}
