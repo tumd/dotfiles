@@ -51,5 +51,7 @@ ssh() {
 # Connect with agent-forwarding enabled but using a locked-down SSH
 # agent. This assumes the key used to connect to the server will be
 # the only one needed.
-[[ $OSTYPE == darwin* ]] && _sap="SSH_ASKPASS=${HOME}/.zsh/misc/ssh-askpass "
-(( ! $+commands[assh] )) && alias assh="${_sap:-}ssh-agent ssh -o AddKeysToAgent=confirm -o ForwardAgent=yes"
+if (( ! $+commands[assh] )); then
+  [[ $OSTYPE == darwin* ]] && [[ -f ${HOME}/.zsh/misc/ssh-askpass ]] && _sap="SSH_ASKPASS=${HOME}/.zsh/misc/ssh-askpass "
+  alias assh="${_sap:-}ssh-agent ssh -o AddKeysToAgent=confirm -o ForwardAgent=yes"
+fi
