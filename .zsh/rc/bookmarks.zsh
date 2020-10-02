@@ -14,8 +14,10 @@ is-at-least 4.3.12 && () {
     MARKPATH=$HOME/.zsh/run/marks
 
     # Add some static entries
-    hash -d log=/var/log
-    hash -d doc=/usr/share/doc
+    if [[ $OSTYPE == linux* ]]; then
+      hash -d -- -log=/var/log
+      hash -d -- -doc=/usr/share/doc
+    fi
 
     # Populate the hash
     for link ($MARKPATH/*(N@)) {
