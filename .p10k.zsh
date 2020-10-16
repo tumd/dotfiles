@@ -34,6 +34,7 @@
     # =========================[ Line #1 ]=========================
     # os_icon               # os identifier
     my_context              # user@hostname
+    proxy                   # system-wide http/https/ftp proxy
     dir                     # current directory
     vcs                     # git status
     # =========================[ Line #2 ]=========================
