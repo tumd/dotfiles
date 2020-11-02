@@ -1,17 +1,8 @@
 # Logout ttyX after inactiviry
-if [[ $(tty) =~ /dev\/tty[1-6] ]]; then TMOUT=1800; fi
-
-# Load defaults
-[[ -f /etc/profile    ]] && source /etc/profile
-# Extend PATH.
-[[ -d /usr/local/sbin ]] && path=(/usr/local/sbin $path)
-[[ -d ~/.local/bin    ]] && path=(~/.local/bin $path)
-[[ -d ~/bin           ]] && path=(~/bin $path)
+if [[ $TTY =~ /dev\/tty[1-6] ]]; then TMOUT=1800; fi
 
 # Use vim
 export EDITOR='vim'
-
-export GPG_TTY=$TTY
 
 # Setting up less colors
 # https://unix.stackexchange.com/questions/108699/documentation-on-less-termcap-variables

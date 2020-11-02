@@ -1,20 +1,34 @@
-# Documentation: https://github.com/romkatv/zsh4humans/blob/v3/README.md.
+# Personal Zsh configuration file. It is strongly recommended to keep all
+# shell customization and configuration (including exported environment
+# variables such as PATH) in this file or in files source by it.
+#
+# Documentation: https://github.com/romkatv/zsh4humans/blob/v5/README.md.
 
 # Periodic auto-update on Zsh startup: 'ask' or 'no'.
 zstyle ':z4h:'                auto-update      'ask'
 # Ask whether to auto-update this often; has no effect if auto-update is 'no'.
 zstyle ':z4h:'                auto-update-days '28'
+
+# Keyboard type: 'mac' or 'pc'.
+zstyle ':z4h:bindkey'         keyboard         'pc'
 # Right-arrow key accepts one character ('partial-accept') from
 # command autosuggestions or the whole thing ('accept')?
 zstyle ':z4h:autosuggestions' forward-char     'accept'
-# End key accepts to the end of the line ('partial-accept') from
-# command autosuggestions or the whole thing ('accept')?
-zstyle ':z4h:autosuggestions' end-of-line      'accept'
-# Send these files over to the remote host when using `z4h ssh`.
-zstyle ':z4h:ssh:*'           send-extra-files '~/.zsh/rc'
 
-# Disable fzf-tab
-zstyle ':z4h:fzf-tab' channel none
+# Enable ('yes') or disable ('no') automatic teleportation of z4h over
+# ssh when connecting to these hosts.
+zstyle ':z4h:ssh:example-hostname1'   enable 'yes'
+zstyle ':z4h:ssh:*.example-hostname2' enable 'no'
+# The default value if none of the overrides above match the hostname.
+zstyle ':z4h:ssh:*'                   enable 'no'
+
+# Send these files over to the remote host when connecting over ssh to the
+# enabled hosts. Multiple files can be listed here.
+zstyle ':z4h:ssh:*' send-extra-files '~/.zsh/rc'
+
+# Move the cursor to the end when Up/Down fetches a command from history?
+zstyle ':zle:up-line-or-beginning-search'   leave-cursor 'yes'
+zstyle ':zle:down-line-or-beginning-search' leave-cursor 'yes'
 
 # Clone additional Git repositories from GitHub.
 #
@@ -35,6 +49,8 @@ z4h source $Z4H/chriskempson/base16-shell/base16-shell.plugin.zsh
 # perform network I/O must be done above. Everything else is best done below.
 z4h init || return
 
+# Export environment variables.
+export GPG_TTY=$TTY
 
 # Use additional Git repositories pulled in with `z4h install`.
 #
@@ -43,23 +59,7 @@ fpath=($Z4H/romkatv/archive $fpath)
 autoload -Uz archive unarchive lsarchive
 
 # Source additional local files if they exist.
-if [[ $LC_TERMINAL == iTerm2 ]]; then
-  # Enable iTerm2 shell integration (if installed).
-  z4h source ~/.iterm2_shell_integration.zsh
-fi
-
-# Define key bindings.
-z4h bindkey z4h-backward-kill-word  Ctrl+Backspace
-z4h bindkey z4h-backward-kill-zword Ctrl+Alt+Backspace
-
-# Sort completion candidates when pressing Tab?
-zstyle ':completion:*'                      sort               false
-# Keep cursor position unchanged when Up/Down fetches a command from history?
-zstyle ':zle:up-line-or-beginning-search'   leave-cursor       true
-zstyle ':zle:down-line-or-beginning-search' leave-cursor       true
-# When presented with the list of choices upon hitting Tab, accept selection
-# and trigger another completion with this key binding.
-zstyle ':fzf-tab:*'                         continuous-trigger tab
+z4h source ~/.iterm2_shell_integration.zsh
 
 () {
   for config_file ($HOME/.zsh/rc/*.zsh) z4h source $config_file
@@ -67,3 +67,35 @@ zstyle ':fzf-tab:*'                         continuous-trigger tab
 
 fpath=($HOME/.zsh/completions $fpath)
 z4h source "$HOME/.zshrc.$HOST" || true
+
+# Define key bindings.
+z4h bindkey z4h-backward-kill-word  Ctrl+Backspace Ctrl+H
+z4h bindkey z4h-backward-kill-zword Ctrl+Alt+Backspace
+
+z4h bindkey undo Ctrl+/  # undo the last command line change
+z4h bindkey redo Alt+/   # redo the last undone command line change
+
+z4h bindkey z4h-cd-back    Alt+Left   # cd into the previous directory
+z4h bindkey z4h-cd-forward Alt+Right  # cd into the next directory
+z4h bindkey z4h-cd-up      Alt+Up     # cd into the parent directory
+z4h bindkey z4h-cd-down    Alt+Down   # cd into a child directory
+
+# Autoload functions.
+autoload -Uz zmv
+
+# Define functions and completions.
+function md() { [[ $# == 1 ]] && mkdir -p -- "$1" && cd -- "$1" }
+compdef _directories md
+
+# Define named directories: ~w <=> Windows home directory on WSL.
+[[ -n $z4h_win_home ]] && hash -d w=$z4h_win_home
+
+# Define aliases.
+alias tree='tree -a -I .git'
+
+# Add flags to existing aliases.
+alias ls="${aliases[ls]:-ls} -A"
+
+# Set shell options: http://zsh.sourceforge.net/Doc/Release/Options.html.
+setopt glob_dots     # no special treatment for file names with a leading dot
+setopt no_auto_menu  # require an extra TAB press to open the completion menu
