@@ -38,7 +38,15 @@ fi
 (( $+commands[openssl] && ! $+commands[http-cert] )) && function http-cert() {
   _hp=("${(@s/:/)${@[1]:-localhost}}")
   _defargs="-subject -issuer -dates -ext subjectAltName"
-  echo | openssl s_client -connect "$_hp[1]":"${_hp[2]:-443}" -servername "$_hp[1]" 2>/dev/null | \
-    openssl x509 -noout "${@[2,-1]:-${=_defargs}}"
-  unset '_hp' '_defarg'
+  _opensslbin="openssl"
+  if [[ $OSTYPE = darwin* ]]; then
+    if [[ -x /usr/local/opt/openssl/bin/openssl ]]; then
+      _opensslbin="/usr/local/opt/openssl/bin/openssl"
+    else
+      _defargs="-subject -issuer -dates"
+    fi
+  fi
+  echo | "${_opensslbin}" s_client -connect "$_hp[1]":"${_hp[2]:-443}" -servername "$_hp[1]" 2>/dev/null | \
+    "${_opensslbin}" x509 -noout "${@[2,-1]:-${=_defargs}}"
+  unset '_hp' '_defarg' '_opensslbin'
 }

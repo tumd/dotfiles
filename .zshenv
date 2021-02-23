@@ -1,4 +1,3 @@
-# Documentation: https://github.com/romkatv/zsh4humans/blob/v3/README.md.
 # Documentation: https://github.com/romkatv/zsh4humans/blob/v5/README.md.
 #
 # Do not modify this file unless you know exactly what you are doing.

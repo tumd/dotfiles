@@ -10,7 +10,11 @@ zstyle ':z4h:'                auto-update      'ask'
 zstyle ':z4h:'                auto-update-days '28'
 
 # Keyboard type: 'mac' or 'pc'.
-zstyle ':z4h:bindkey'         keyboard         'pc'
+if [[ $OSTYPE == darwin* ]]; then
+  zstyle ':z4h:bindkey'         keyboard         'mac'
+else
+  zstyle ':z4h:bindkey'         keyboard         'pc'
+fi
 # Right-arrow key accepts one character ('partial-accept') from
 # command autosuggestions or the whole thing ('accept')?
 zstyle ':z4h:autosuggestions' forward-char     'accept'
