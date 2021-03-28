@@ -86,8 +86,22 @@ set formatoptions-=cro " dont continue with comment after enter in insert or o/O
 " make backspace behave in a sane manner
 set backspace=indent,eol,start
 
-nmap _$ :call Preserve("%s/\\s\\+$//e")<CR>   " Strip trailing spaces
-nmap _= :call Preserve("normal gg=G")<CR>     " Fix indent
+" Next/prev row when row end/begin
+set whichwrap=<,>,h,l,[,]
+
+" Leader Shortcuts
+let mapleader=","       " leader is comma
+
+
+nmap <leader>l :set list!<CR> " Show invisibles
+nmap <leader>w :w!<cr>
+nmap <leader>r :retab<cr>
+
+nmap <leader>s :call Preserve("%s/\\s\\+$//e")<CR>   " Strip trailing spaces
+nmap <leader>i :call Preserve("normal gg=G")<CR>     " Fix indent
+
+" Toggle paste
+set pastetoggle=<F9>
 
 " Indent/deindent with tab/shift+tab in command mode
 noremap <S-Tab> <<
@@ -115,7 +129,8 @@ set shortmess+=I
 
 " syntax highlighting
 syntax on
-set synmaxcol=80
+set colorcolumn=80
+"set synmaxcol=80  " Sometimes messes with syntax.
 
 " stop unnecessary rendering
 set lazyredraw
@@ -163,12 +178,6 @@ command! MakeTags !ctags -R .
 " Reload vimrc
 command! Reload :source $MYVIMRC
 
-" Leader Shortcuts
-let mapleader=","       " leader is comma
-
-" Show invisibles
-nmap <leader>l :set list!<CR>
-
 set ttyfast                     " faster redraw
 set backspace=indent,eol,start
 function! Preserve(command)
@@ -198,3 +207,4 @@ let g:syntastic_always_populate_loc_list = 1
 let g:syntastic_auto_loc_list = 1
 let g:syntastic_check_on_open = 1
 let g:syntastic_check_on_wq = 0
+let g:syntastic_python_python_exec = 'python3'
