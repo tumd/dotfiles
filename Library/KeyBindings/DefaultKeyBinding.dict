@@ -16,4 +16,7 @@
 "$^\UF729" = "moveToBeginningOfDocumentAndModifySelection:";
 /* Shift + Ctrl + End Button*/
 "$^\UF72B" = "moveToEndOfDocumentAndModifySelection:"; 
+/* Never insert non-breaking spaces. Only regular space */
+/* https://superuser.com/questions/78245/how-to-disable-the-option-space-key-combination-for-non-breaking-spaces */
+"~ " = ("insertText:", " ");
 }
