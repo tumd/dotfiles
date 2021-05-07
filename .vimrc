@@ -83,6 +83,8 @@ set expandtab     " tabs are spaces, not tabs
 set autoindent    " enable auto indentation
 set formatoptions-=cro " dont continue with comment after enter in insert or o/O
 
+set nofixendofline " don't autoadd newline at the end of files
+
 " make backspace behave in a sane manner
 set backspace=indent,eol,start
 

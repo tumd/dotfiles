@@ -28,7 +28,7 @@ zstyle ':z4h:ssh:*'                   enable 'no'
 
 # Send these files over to the remote host when connecting over ssh to the
 # enabled hosts. Multiple files can be listed here.
-zstyle ':z4h:ssh:*' send-extra-files '~/.zsh/rc'
+zstyle ':z4h:ssh:*' send-extra-files '~/.zsh/rc' '~/.vimrc' '~/.vim'
 
 # Move the cursor to the end when Up/Down fetches a command from history?
 zstyle ':zle:up-line-or-beginning-search'   leave-cursor 'yes'
@@ -98,7 +98,7 @@ compdef _directories md
 alias tree='tree -a -I .git'
 
 # Add flags to existing aliases.
-alias ls="${aliases[ls]:-ls} -A"
+# alias ls="${aliases[ls]:-ls} -A"
 
 # Set shell options: http://zsh.sourceforge.net/Doc/Release/Options.html.
 setopt glob_dots     # no special treatment for file names with a leading dot
