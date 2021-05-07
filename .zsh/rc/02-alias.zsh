@@ -40,8 +40,8 @@ fi
   _defargs="-subject -issuer -dates -ext subjectAltName"
   _opensslbin="openssl"
   if [[ $OSTYPE = darwin* ]]; then
-    if [[ -x /usr/local/opt/openssl/bin/openssl ]]; then
-      _opensslbin="/usr/local/opt/openssl/bin/openssl"
+    if [[ -x "${HOMEBREW_PREFIX}/opt/openssl/bin/openssl" ]]; then
+      _opensslbin="${HOMEBREW_PREFIX}/opt/openssl/bin/openssl"
     else
       _defargs="-subject -issuer -dates"
     fi
