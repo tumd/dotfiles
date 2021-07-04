@@ -10,7 +10,7 @@
 # cumbersome to type, you can also type `@@` and this will be turned
 # into `~-` by ZLE.
 
-is-at-least 4.3.12 && () {
+() {
     MARKPATH=$HOME/.zsh/run/marks
 
     # Add some static entries
