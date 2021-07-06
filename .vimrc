@@ -36,8 +36,13 @@ set mouse=
 
 " maintain undo history between sessions
 set undofile
-set undodir=~/.vim/undo
-set noswapfile
+set undodir^=~/.vim/tmp//
+" and swap
+set swapfile
+set directory^=~/.vim/tmp//
+" and backup
+set backup
+set backupdir^=~/.vim/tmp//
 
 " Display all matching files when we tab complete
 set wildmenu
