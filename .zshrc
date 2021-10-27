@@ -5,9 +5,13 @@
 # Documentation: https://github.com/romkatv/zsh4humans/blob/v5/README.md.
 
 # Periodic auto-update on Zsh startup: 'ask' or 'no'.
-zstyle ':z4h:'                auto-update      'ask'
+# You can manually run `z4h update` to update everything.
+zstyle ':z4h:' auto-update      'no'
 # Ask whether to auto-update this often; has no effect if auto-update is 'no'.
-zstyle ':z4h:'                auto-update-days '28'
+zstyle ':z4h:' auto-update-days '28'
+
+# Move prompt to the bottom when zsh starts and on Ctrl+L.
+zstyle ':z4h:' prompt-at-bottom 'yes'
 
 # Keyboard type: 'mac' or 'pc'.
 if [[ $OSTYPE == darwin* ]]; then
@@ -17,7 +21,15 @@ else
 fi
 # Right-arrow key accepts one character ('partial-accept') from
 # command autosuggestions or the whole thing ('accept')?
-zstyle ':z4h:autosuggestions' forward-char     'accept'
+zstyle ':z4h:autosuggestions' forward-char 'accept'
+
+# Recursively traverse directories when TAB-completing files.
+zstyle ':z4h:fzf-complete' recurse-dirs 'yes'
+
+# Enable direnv to automatically source .envrc files.
+zstyle ':z4h:direnv'         enable 'no'
+# Show "loading" and "unloading" notifications from direnv.
+zstyle ':z4h:direnv:success' notify 'yes'
 
 # Enable ('yes') or disable ('no') automatic teleportation of z4h over
 # ssh when connecting to these hosts.
@@ -27,12 +39,8 @@ zstyle ':z4h:ssh:*.example-hostname2' enable 'no'
 zstyle ':z4h:ssh:*'                   enable 'no'
 
 # Send these files over to the remote host when connecting over ssh to the
-# enabled hosts. Multiple files can be listed here.
+# enabled hosts.
 zstyle ':z4h:ssh:*' send-extra-files '~/.zsh/rc' '~/.vimrc' '~/.vim'
-
-# Move the cursor to the end when Up/Down fetches a command from history?
-zstyle ':zle:up-line-or-beginning-search'   leave-cursor 'yes'
-zstyle ':zle:down-line-or-beginning-search' leave-cursor 'yes'
 
 # Only use integrated tmux if we aren't already in tmux
 [[ -z $TMUX ]] || zstyle ':z4h:' start-tmux 'no'
