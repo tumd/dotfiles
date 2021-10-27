@@ -34,6 +34,9 @@ zstyle ':z4h:ssh:*' send-extra-files '~/.zsh/rc' '~/.vimrc' '~/.vim'
 zstyle ':zle:up-line-or-beginning-search'   leave-cursor 'yes'
 zstyle ':zle:down-line-or-beginning-search' leave-cursor 'yes'
 
+# Only use integrated tmux if we aren't already in tmux
+[[ -z $TMUX ]] || zstyle ':z4h:' start-tmux 'no'
+
 # Clone additional Git repositories from GitHub.
 #
 # This doesn't do anything apart from cloning the repository and keeping it
