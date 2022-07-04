@@ -15,7 +15,7 @@ fi
 # agent. This assumes the key used to connect to the server will be
 # the only one needed.
 if (( ! $+commands[assh] )); then
-  [[ $OSTYPE == darwin* ]] && [[ -f ${HOME}/.zsh/misc/ssh-askpass ]] && _sap="SSH_ASKPASS=${HOME}/.zsh/misc/ssh-askpass "
+  [[ $OSTYPE == darwin* ]] && [[ -f ${HOME}/.zsh/misc/ssh-askpass ]] && _sap="DISPLAY=ssh-askpass SSH_ASKPASS=${HOME}/.zsh/misc/ssh-askpass "
   alias assh="${_sap:-}ssh-agent ssh -o AddKeysToAgent=confirm -o ForwardAgent=yes"
   unset _sap
 fi

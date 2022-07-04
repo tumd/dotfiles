@@ -14,23 +14,39 @@
 # OTHER TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE OR
 # PERFORMANCE OF THIS SOFTWARE.
 #
-# https://github.com/theseal/ssh-askpass/blob/81d5bf9926c5607793aec3edd03d9b823751575f/ssh-askpass
+# https://github.com/theseal/ssh-askpass/blob/b490586078ae75e5ebd25032b9415207425114de/ssh-askpass
 
 on run argv
     set args to argv as text
-    set frontmost_application to name of (info for (path to frontmost application))
-    tell application frontmost_application
-        if args ends with ": " or args ends with ":" then
-            if args contains "pass" or args contains "pin" then
-                display dialog args with icon caution default button {get localized string of "OK"} default answer "" with hidden answer
+    launch application "System Events"
+    set agent to POSIX file "/System/Applications/Utilities/Terminal.app/Contents/Resources/Terminal.icns"
+    set dialog_timeout to 15
+    try
+        tell application "System Events"
+            if args ends with ": " or args ends with ":" then
+                if args contains "pass" or args contains "pin" then
+                    display dialog args with icon agent default button {get localized string of "OK"} default answer "" with hidden answer
+                else
+                    display dialog args with icon agent default button {get localized string of "OK"} default answer ""
+                end if
+                set text_returned to result's text returned
             else
-                display dialog args with icon caution default button {get localized string of "OK"} default answer ""
+                display dialog args with icon agent default button {get localized string of "Cancel"} giving up after dialog_timeout
+                if gave up of result then
+                    error result
+                end if
+                set text_returned to ""
             end if
-            return result's text returned
+            quit
+        end tell
+        if text_returned is not "" then
+            return text_returned
         else
-            display dialog args with icon caution default button {get localized string of "Cancel"}
             return
         end if
-    end tell
+    on error e number n
+        tell application "System Events" to quit
+        error e
+    end try
 end run
 
