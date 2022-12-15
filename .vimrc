@@ -6,20 +6,74 @@ set nocompatible
 scriptencoding utf-8
 set encoding=utf-8
 
-" Load vim-pathogen pluginmgr
-runtime bundle/vim-pathogen/autoload/pathogen.vim
-execute pathogen#infect()
-set sessionoptions-=options
+" Ward off unexpected things that your distro might have made, as
+" well as sanely reset options when re-sourcing .vimrc
+set nocompatible
 
-" enable syntax and plugins
-syntax enable           " enable syntax processing
+" Set Dein base path (required)
+let s:dein_base = '~/.local/share/dein'
 
-if filereadable(expand("~/.vimrc_background"))
-  let base16colorspace=256
-  source ~/.vimrc_background
+" Set Dein source path (required)
+let s:dein_src = '~/.local/share/dein/repos/github.com/Shougo/dein.vim'
+
+" Set Dein runtime path (required)
+execute 'set runtimepath+=' . s:dein_src
+
+" Call Dein initialization (required)
+call dein#begin(s:dein_base)
+
+call dein#add(s:dein_src)
+
+" Your plugins go here:
+"call dein#add('Shougo/neosnippet.vim')
+"call dein#add('Shougo/neosnippet-snippets')
+call dein#add('tpope/vim-sensible')
+call dein#add('tpope/vim-surround')
+call dein#add('tpope/vim-commentary')
+
+call dein#add('tinted-theming/base16-vim')
+call dein#add('itchyny/lightline.vim')
+call dein#add('daviesjamie/vim-base16-lightline')
+
+call dein#add('vim-syntastic/syntastic')
+
+call dein#add('google/vim-jsonnet')
+call dein#add('vim-python/python-syntax')
+
+
+" Finish Dein initialization (required)
+call dein#end()
+
+" Attempt to determine the type of a file based on its name and possibly its
+" contents. Use this to allow intelligent auto-indenting for each filetype,
+" and for plugins that are filetype specific.
+if has('filetype')
+  filetype indent plugin on
 endif
 
-filetype plugin indent on
+" Enable syntax highlighting
+if has('syntax')
+  syntax on
+endif
+
+" Uncomment if you want to install not-installed plugins on startup.
+if dein#check_install()
+  call dein#install()
+endif
+
+let base16colorspace=256
+colorscheme base16-default-dark
+
+let g:lightline = {
+      \ 'colorscheme': 'base16',
+      \ 'active': {
+      \   'left': [ [ 'mode', 'paste' ],
+      \             [ 'gitbranch', 'readonly', 'filename', 'modified' ] ]
+      \ },
+      \ 'component_function': {
+      \   'gitbranch': 'FugitiveHead'
+      \ },
+      \ }
 
 " Search down into subfolders
 " Provides tab-completion for all file-related tasks
