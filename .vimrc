@@ -6,10 +6,6 @@ set nocompatible
 scriptencoding utf-8
 set encoding=utf-8
 
-" Ward off unexpected things that your distro might have made, as
-" well as sanely reset options when re-sourcing .vimrc
-set nocompatible
-
 " Set Dein base path (required)
 let s:dein_base = '~/.local/share/dein'
 
