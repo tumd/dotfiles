@@ -6,39 +6,48 @@ set nocompatible
 scriptencoding utf-8
 set encoding=utf-8
 
-" Set Dein base path (required)
-let s:dein_base = '~/.local/share/dein'
+" Install vim-plug
+let data_dir = has('nvim') ? stdpath('data') . '/site' : '~/.vim'
+if empty(glob(data_dir . '/autoload/plug.vim'))
+    silent execute '!curl -fLo '.data_dir.'/autoload/plug.vim --create-dirs  https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
+      autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
+endif
 
-" Set Dein source path (required)
-let s:dein_src = '~/.local/share/dein/repos/github.com/Shougo/dein.vim'
+call plug#begin()
+" The default plugin directory will be as follows:
+"   - Vim (Linux/macOS): '~/.vim/plugged'
+"   - Vim (Windows): '~/vimfiles/plugged'
+"   - Neovim (Linux/macOS/Windows): stdpath('data') . '/plugged'
+" You can specify a custom plugin directory by passing it as the argument
+"   - e.g. `call plug#begin('~/.vim/plugged')`
+"   - Avoid using standard Vim directory names like 'plugin'
 
-" Set Dein runtime path (required)
-execute 'set runtimepath+=' . s:dein_src
+" Make sure you use single quotes
 
-" Call Dein initialization (required)
-call dein#begin(s:dein_base)
+Plug 'tpope/vim-sensible'
+Plug 'tpope/vim-surround'
+Plug 'tpope/vim-commentary'
 
-call dein#add(s:dein_src)
+" Plug 'tinted-theming/base16-vim'
+Plug 'tumd/base16-vim', { 'branch': 'patch-1' }
+Plug 'itchyny/lightline.vim'
+Plug 'daviesjamie/vim-base16-lightline'
 
-" Your plugins go here:
-"call dein#add('Shougo/neosnippet.vim')
-"call dein#add('Shougo/neosnippet-snippets')
-call dein#add('tpope/vim-sensible')
-call dein#add('tpope/vim-surround')
-call dein#add('tpope/vim-commentary')
+Plug 'dense-analysis/ale'
 
-call dein#add('tinted-theming/base16-vim')
-call dein#add('itchyny/lightline.vim')
-call dein#add('daviesjamie/vim-base16-lightline')
+Plug 'google/vim-jsonnet'
+Plug 'vim-python/python-syntax'
+if has("patch-8.0.1453")
+  Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
+endif
+Plug 'Glench/Vim-Jinja2-Syntax'
 
-call dein#add('vim-syntastic/syntastic')
-
-call dein#add('google/vim-jsonnet')
-call dein#add('vim-python/python-syntax')
+Plug 'junegunn/vim-plug'
 
 
-" Finish Dein initialization (required)
-call dein#end()
+" Initialize plugin system
+" - Automatically executes `filetype plugin indent on` and `syntax enable`.
+call plug#end()
 
 " Attempt to determine the type of a file based on its name and possibly its
 " contents. Use this to allow intelligent auto-indenting for each filetype,
@@ -52,13 +61,12 @@ if has('syntax')
   syntax on
 endif
 
-" Uncomment if you want to install not-installed plugins on startup.
-if dein#check_install()
-  call dein#install()
+if exists('$BASE16_THEME')
+    \ && (!exists('g:colors_name') 
+    \ || g:colors_name != 'base16-$BASE16_THEME')
+  let base16colorspace=256
+  colorscheme base16-$BASE16_THEME
 endif
-
-let base16colorspace=256
-colorscheme base16-default-dark
 
 let g:lightline = {
       \ 'colorscheme': 'base16',
@@ -138,7 +146,9 @@ set expandtab     " tabs are spaces, not tabs
 set autoindent    " enable auto indentation
 set formatoptions-=cro " dont continue with comment after enter in insert or o/O
 
-set nofixendofline " don't autoadd newline at the end of files
+if v:version > 704
+  set nofixendofline " don't autoadd newline at the end of files
+endif
 
 " make backspace behave in a sane manner
 set backspace=indent,eol,start
@@ -254,14 +264,3 @@ cmap w!! w !sudo tee > /dev/null %
 
 " PLUGINS
 " =======
-
-" Syntastic
-set statusline+=%#warningmsg#
-set statusline+=%{SyntasticStatuslineFlag()}
-set statusline+=%*
-
-let g:syntastic_always_populate_loc_list = 1
-let g:syntastic_auto_loc_list = 1
-let g:syntastic_check_on_open = 1
-let g:syntastic_check_on_wq = 0
-let g:syntastic_python_python_exec = 'python3'
