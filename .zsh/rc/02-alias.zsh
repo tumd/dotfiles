@@ -50,3 +50,12 @@ fi
     "${_opensslbin}" x509 -noout "${@[2,-1]:-${=_defargs}}"
   unset '_hp' '_defarg' '_opensslbin'
 }
+
+alias urldecode='python3 -c "import sys, urllib.parse as ul; \
+      print(ul.unquote_plus(sys.argv[1]))"'
+alias urlencode='python3 -c "import sys, urllib.parse as ul; \
+        print (ul.quote_plus(sys.argv[1]))"'
+
+(( ! $+commands[tailscale] )) && [[ -r "/Applications/Tailscale.app/Contents/MacOS/Tailscale" ]] && {
+  alias tailscale="/Applications/Tailscale.app/Contents/MacOS/Tailscale"
+}

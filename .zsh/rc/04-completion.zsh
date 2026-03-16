@@ -7,4 +7,6 @@ fi
 if (( $+functions[complete] )); then
   (( $+commands[vault] )) && complete -o nospace -C vault vault
   (( $+commands[terraform] )) && complete -o nospace -C terraform terraform
+  (( $+commands[tofu] )) && complete -o nospace -C tofu tofu
 fi
+

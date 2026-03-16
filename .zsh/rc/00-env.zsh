@@ -17,7 +17,7 @@ export EDITOR='vim'
 # se      rmso      stop standout
 # us      smul      start underline
 # ue      rmul      stop underline
-(( ${terminfo[colors]:-0} >= 8 )) && {
+(( ${terminfo[colors]:-0} >= 8 )) && (( $+commands[tput] )) && {
   export LESS_TERMCAP_mb=$(tput blink; tput setaf 1) # red
   export LESS_TERMCAP_md=$(tput bold; tput setaf 1) # red
   export LESS_TERMCAP_so="$(tput bold; tput setaf 3; tput setab 4)" # yellow on blue
