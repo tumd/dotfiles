@@ -1,19 +1,22 @@
 [alias]
-  lg = log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --
-  patch = !git --no-pager diff --no-color
+  lg = log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit
+  patch = !git -P diff
 
-[merge]
+[pull]
   ff = only
+; [merge]
+;   ff = only
   # I pretty much never mean to do a real merge, since I use a rebase workflow.
   # Note: this global option applies to all merges, including those done during a git pull
   # https://git-scm.com/docs/git-config#git-config-mergeff
   # https://gist.github.com/scottnonnenberg/fefa3f65fdb3715d25882f3023b31c29
 
-  conflictstyle = diff3
+  conflictstyle = zdiff3
   # Standard diff is two sets of final changes. This introduces the original text before each side's changes.
   # https://git-scm.com/docs/git-config#git-config-mergeconflictStyle
 
 [push]
+  autoSetupRemote = true
   default = simple
   # "push the current branch back to the branch whose changes are usually integrated into the current branch"
   # "refuse to push if the upstream branch’s name is different from the local one"
@@ -32,32 +35,44 @@
   # https://git-scm.com/docs/git-config#git-config-transferfsckObjects
   # via https://groups.google.com/forum/#!topic/binary-transparency/f-BI4o8HZW0
 
-[pager]
-  diff = ~/bin/diff-so-fancy | less --tabs=2 -RFXMi
-  show = ~/bin/diff-so-fancy | less --tabs=2 -RFXMi
+[commit]
+  verbose = true
+  # This adds the whole commit diff in the text editor where you’re writing
+  # your commit message, to help you remember what you were doing.
 
-[color]
-  ui = always
-[color "diff"]
-  meta = yellow bold
-  commit = green bold
-  frag = magenta bold
-  old = red bold
-  new = green bold
-  whitespace = red reverse
-[color "diff-highlight"]
-  oldNormal = red bold
-  oldHighlight = "red bold 52"
-  newNormal = "green bold"
-  newHighlight = "green bold 22"
-[color "branch"]
-  current = yellow reverse
-  local = yellow
-  remote = green
-[color "status"]
-  added = yellow
-  changed = green
-  untracked = cyan
+[diff]
+  algorithm = histogram
+
+[branch]
+  sort = -committerdate
+  # Makes git branch sort by most recently used branches instead of
+  # alphabetical, to make it easier to find branches.
+
+[core]
+  pager = delta
+
+[delta]
+  syntax-theme = base16
+  commit-style                  = bold yellow
+  file-style                    = bright-yellow
+  hunk-header-style             = bold syntax
+  minus-style                   = bold red
+  minus-non-emph-style          = bold red
+  minus-emph-style              = bold red 52
+  minus-empty-line-marker-style = normal "#3f0001"
+  zero-style                    = normal
+  plus-style                    = bold green
+  plus-non-emph-style           = bold green
+  plus-emph-style               = bold green 22
+  plus-empty-line-marker-style  = normal "#002800"
+  whitespace-error-style        = reverse magenta
+
+[log]
+  date = iso
+  # Display dates as 2023-05-25 13:54:51 instead of Thu May 25 13:54:51 2023
+
+[interactive]
+  diffFilter = delta --color-only
 
 # rewrites of repo paths
 [url "git@github.com:"]
@@ -83,3 +98,6 @@
 # use separate file for username / github token / etc
 [include]
   path = ~/.gitconfig.local
+
+[init]
+	defaultBranch = main

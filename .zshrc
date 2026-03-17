@@ -22,7 +22,7 @@ fi
 
 # Enable iTerm2 integration
 if [[ $LC_TERMINAL == iTerm2 ]]; then
-  zstyle ':z4h:' iterm2-integration 'yes'
+  zstyle ':z4h:' term-shell-integration 'yes'
 fi
 
 # Right-arrow key accepts one character ('partial-accept') from
@@ -46,10 +46,10 @@ zstyle ':z4h:ssh:*'                   enable 'no'
 
 # Send these files over to the remote host when connecting over ssh to the
 # enabled hosts.
-zstyle ':z4h:ssh:*' send-extra-files '~/.zsh/rc' '~/.vimrc' '~/.vim'
+zstyle ':z4h:ssh:*' send-extra-files '~/.zsh/rc' '~/.vimrc'
 
-# Only use integrated tmux if we aren't already in tmux
-[[ -z $TMUX ]] || zstyle ':z4h:' start-tmux 'no'
+# Usually we already run in tmux
+zstyle ':z4h:' start-tmux 'no'
 
 # Clone additional Git repositories from GitHub.
 #
@@ -59,10 +59,11 @@ zstyle ':z4h:ssh:*' send-extra-files '~/.zsh/rc' '~/.vimrc' '~/.vim'
 #z4h install ohmyzsh/ohmyzsh || return
 
 z4h install romkatv/archive || return
-z4h install tinted-theming/base16-shell || return
+z4h install tinted-theming/tinted-shell || return
+
 
 # Placed here because the scripts from base16-shell sometimes produce output.
-z4h source $Z4H/tinted-theming/base16-shell/base16-shell.plugin.zsh
+z4h source $Z4H/tinted-theming/tinted-shell/base16-shell.plugin.zsh
 
 # Install or update core components (fzf, zsh-autosuggestions, etc.) and
 # initialize Zsh. After this point console I/O is unavailable until Zsh

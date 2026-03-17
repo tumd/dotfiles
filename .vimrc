@@ -13,7 +13,7 @@ if empty(glob(data_dir . '/autoload/plug.vim'))
       autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
 endif
 
-call plug#begin()
+silent! call plug#begin()
 " The default plugin directory will be as follows:
 "   - Vim (Linux/macOS): '~/.vim/plugged'
 "   - Vim (Windows): '~/vimfiles/plugged'
@@ -26,10 +26,11 @@ call plug#begin()
 
 Plug 'tpope/vim-sensible'
 Plug 'tpope/vim-surround'
+Plug 'tpope/vim-repeat'
+Plug 'tpope/vim-speeddating'
 Plug 'tpope/vim-commentary'
 
-" Plug 'tinted-theming/base16-vim'
-Plug 'tumd/base16-vim', { 'branch': 'patch-1' }
+Plug 'tinted-theming/tinted-vim'
 Plug 'itchyny/lightline.vim'
 Plug 'daviesjamie/vim-base16-lightline'
 
@@ -61,11 +62,9 @@ if has('syntax')
   syntax on
 endif
 
-if exists('$BASE16_THEME')
-    \ && (!exists('g:colors_name') 
-    \ || g:colors_name != 'base16-$BASE16_THEME')
-  let base16colorspace=256
-  colorscheme base16-$BASE16_THEME
+if filereadable(expand("$HOME/.config/tinted-theming/set_theme.vim"))
+  let tinted_colorspace=256
+  source $HOME/.config/tinted-theming/set_theme.vim
 endif
 
 let g:lightline = {
@@ -181,6 +180,15 @@ vnoremap <Tab> >gv
 autocmd FileType make setlocal ts=8 sts=8 sw=8 noexpandtab
 autocmd FileType yaml setlocal ts=2 sts=2 sw=2 expandtab
 
+autocmd BufNewFile,BufRead Jenkinsfile[-.]* setf groovy
+
+" Enable spell checking, which is not on by default for commit messages.
+au FileType gitcommit setlocal spell
+"
+" Reset textwidth if you've previously overridden it.
+au FileType gitcommit setlocal textwidth=72
+
+
 " INTERFACE
 " =========
 
@@ -204,6 +212,8 @@ set lazyredraw
 
 " show line numbers
 set number
+" show relative line numbers
+" set rnu
 
 " show command in bottom bar
 set showcmd
@@ -261,6 +271,29 @@ endfunction
 
 " Allow saving of files as sudo when I forgot to start vim using sudo.
 cmap w!! w !sudo tee > /dev/null %
+
+" Auto paste on paste
+function! WrapForTmux(s)
+  " if !exists('$TMUX')
+    return a:s
+  " endif
+
+  let tmux_start = "\<Esc>Ptmux;"
+  let tmux_end = "\<Esc>\\"
+
+  return tmux_start . substitute(a:s, "\<Esc>", "\<Esc>\<Esc>", 'g') . tmux_end
+endfunction
+
+let &t_SI .= WrapForTmux("\<Esc>[?2004h")
+let &t_EI .= WrapForTmux("\<Esc>[?2004l")
+
+function! XTermPasteBegin()
+  set pastetoggle=<Esc>[201~
+  set paste
+  return ""
+endfunction
+
+inoremap <special> <expr> <Esc>[200~ XTermPasteBegin()
 
 " PLUGINS
 " =======

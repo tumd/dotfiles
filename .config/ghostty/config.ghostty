@@ -1,0 +1,10 @@
+font-family = JetBrains Mono
+font-size = 12
+
+macos-option-as-alt = left
+macos-auto-secure-input = true
+
+keybind = alt+arrow_left=unbind
+keybind = alt+arrow_right=unbind
+
+config-file = ?auto/theme.ghostty
