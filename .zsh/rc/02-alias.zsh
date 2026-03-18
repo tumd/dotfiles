@@ -56,6 +56,14 @@ alias urldecode='python3 -c "import sys, urllib.parse as ul; \
 alias urlencode='python3 -c "import sys, urllib.parse as ul; \
         print (ul.quote_plus(sys.argv[1]))"'
 
-(( ! $+commands[tailscale] )) && [[ -r "/Applications/Tailscale.app/Contents/MacOS/Tailscale" ]] && {
-  alias tailscale="/Applications/Tailscale.app/Contents/MacOS/Tailscale"
+[[ -x "/Applications/Tailscale.app/Contents/MacOS/Tailscale" ]] && {
+  alias tailscale=${aliases[tailscale]:-"/Applications/Tailscale.app/Contents/MacOS/Tailscale"}
 }
+
+alias ls="${aliases[ls]:-ls} --color=auto"
+if [[ -n $commands[dircolors] && ${${:-ls}:c:A:t} != busybox* ]]; then
+  alias ls="${aliases[ls]:-ls} --group-directories-first"
+fi
+
+alias '$'=' '
+alias '%'=' '

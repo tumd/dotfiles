@@ -51,6 +51,9 @@ zstyle ':z4h:ssh:*' send-extra-files '~/.zsh/rc' '~/.vimrc'
 # Usually we already run in tmux
 zstyle ':z4h:' start-tmux 'no'
 
+# Propagate current dir to new tabs
+zstyle ':z4h:'                  propagate-cwd          'yes'
+
 # Clone additional Git repositories from GitHub.
 #
 # This doesn't do anything apart from cloning the repository and keeping it
@@ -78,13 +81,14 @@ export GPG_TTY=$TTY
 #
 
 fpath=($Z4H/romkatv/archive $fpath)
-autoload -Uz archive unarchive lsarchive
+fpath=(~/.zsh/completions $fpath)
+
+autoload -Uz -- archive unarchive lsarchive
 
 () {
-  for config_file ($HOME/.zsh/rc/*.zsh) z4h source $config_file
+  for config_file ($HOME/.zsh/rc/*.zsh) z4h source -c -- $config_file
 }
 
-fpath=($HOME/.zsh/completions $fpath)
 z4h source "$HOME/.zshrc.$HOST" || true
 
 # Define key bindings.
