@@ -99,5 +99,8 @@
 [include]
   path = ~/.gitconfig.local
 
+[includeIf "hasconfig:remote.*.url:https://github.com/**"]
+  path = ~/.config/git/github.inc
+
 [init]
 	defaultBranch = main

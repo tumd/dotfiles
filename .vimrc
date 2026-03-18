@@ -29,6 +29,7 @@ Plug 'tpope/vim-surround'
 Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-speeddating'
 Plug 'tpope/vim-commentary'
+Plug 'ciaranm/securemodelines'
 
 Plug 'tinted-theming/tinted-vim'
 Plug 'itchyny/lightline.vim'

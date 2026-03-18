@@ -4,6 +4,17 @@ if [[ $TTY =~ /dev\/tty[1-6] ]]; then TMOUT=1800; fi
 # Use vim
 export EDITOR='vim'
 
+(( $+commands[bat] )) && {
+  export PAGER='bat -p'
+  export BAT_PAGER='less -RXS --mouse'
+
+  if [[ $OSTYPE == darwin* ]]; then
+    export MANPAGER="sh -c 'col -bx | bat -l man -p'"
+  else
+    export MANPAGER="bat -l man -p"
+  fi
+}
+
 # Setting up less colors
 # https://unix.stackexchange.com/questions/108699/documentation-on-less-termcap-variables
 # termcap terminfo
@@ -20,7 +31,7 @@ export EDITOR='vim'
 (( ${terminfo[colors]:-0} >= 8 )) && (( $+commands[tput] )) && {
   export LESS_TERMCAP_mb=$(tput blink; tput setaf 1) # red
   export LESS_TERMCAP_md=$(tput bold; tput setaf 1) # red
-  export LESS_TERMCAP_so="$(tput bold; tput setaf 3; tput setab 4)" # yellow on blue
+  export LESS_TERMCAP_so="$(tput bold; tput setaf 0; tput setab 1)" # black on red
   export LESS_TERMCAP_us=$(tput smul; tput setaf 2) # green
   export LESS_TERMCAP_se=$'\E[0m'
   export LESS_TERMCAP_ue=$'\E[0m'

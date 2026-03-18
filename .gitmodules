@@ -1,6 +1,3 @@
-[submodule "git/bin/bundle/diff-so-fancy"]
-	path = bin/bundle/diff-so-fancy
-  url = https://github.com/so-fancy/diff-so-fancy.git
 [submodule "shell/.tmux/plugins/tpm"]
 	path = .tmux/plugins/tpm
   url = https://github.com/tmux-plugins/tpm
