@@ -4,11 +4,9 @@ if [[ $OSTYPE == linux* ]]; then
   # Try use ssh-agent started from systemctl --user
   [[ ! -S "$SSH_AUTH_SOCK" && -r "${XDG_RUNTIME_DIR:=/run/user/${UID}}/openssh_agent" ]] && export SSH_AUTH_SOCK="${XDG_RUNTIME_DIR:=/run/user/${UID}}/openssh_agent"
 elif [[ $OSTYPE == darwin* ]]; then
-  for _sshf in /private/tmp/com.apple.launchd.*/Listeners; do
-    [[ ! -S "$SSH_AUTH_SOCK" && -r "$_sshf" ]] && export SSH_AUTH_SOCK="$_sshf"
-    break
-  done
-  unset _sshf
+  if [[ ! -S "$SSH_AUTH_SOCK" ]]; then
+    export SSH_AUTH_SOCK="/{private/tmp,var/run}/com.apple.launchd.*/Listeners(-=Ne'<[[ -r ${REPLY:a} ]]>')"
+  fi
 fi
 
 # Connect with agent-forwarding enabled but using a locked-down SSH
