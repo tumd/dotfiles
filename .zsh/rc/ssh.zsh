@@ -5,7 +5,12 @@ if [[ $OSTYPE == linux* ]]; then
   [[ ! -S "$SSH_AUTH_SOCK" && -r "${XDG_RUNTIME_DIR:=/run/user/${UID}}/openssh_agent" ]] && export SSH_AUTH_SOCK="${XDG_RUNTIME_DIR:=/run/user/${UID}}/openssh_agent"
 elif [[ $OSTYPE == darwin* ]]; then
   if [[ ! -S "$SSH_AUTH_SOCK" ]]; then
-    export SSH_AUTH_SOCK="/{private/tmp,var/run}/com.apple.launchd.*/Listeners(-=Ne'<[[ -r ${REPLY:a} ]]>')"
+    local _sshf
+    for _sshf in /{private/tmp,var/run}/com.apple.launchd.*/Listeners(-=Ne'<[[ -r ${REPLY:a} ]]>'); do
+      export SSH_AUTH_SOCK="$_sshf"
+      break
+    done
+    unset _sshf
   fi
 fi
 
