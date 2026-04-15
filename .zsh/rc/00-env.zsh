@@ -39,3 +39,6 @@ export EDITOR='vim'
 }
 
 export HOMEBREW_BUNDLE_FILE="~/.config/yadm/Brewfile"
+
+export GOPATH=$HOME/go
+export PATH=$PATH:$GOPATH/bin
